@@ -5,6 +5,7 @@
 !yarn.lock
 *.log
 *.ai
+*~
 out/
 node_modules/
 coverage/
