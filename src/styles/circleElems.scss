@@ -1,0 +1,40 @@
+@property --progress {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 0%;
+}
+
+.circleContainer {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  margin: 20px auto;
+  border: 2px dashed #3498db;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circlePoint {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  offset-path: circle(50% at 50% 50%);
+  offset-distance: calc(var(--start) + var(--progress));
+  offset-rotate: 0deg;
+  animation: moveAlongPath 6s infinite linear;
+}
+
+@keyframes moveAlongPath {
+  to {
+    --progress: 100%;
+  }
+}
