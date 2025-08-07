@@ -4,6 +4,12 @@
   initial-value: 0%;
 }
 
+@mixin circlePointContentActiveStyles {
+  border-width: 2px;
+  width: 100%;
+  height: 100%;
+}
+
 .circleContainer {
   position: relative;
   width: 400px;
@@ -18,19 +24,44 @@
 
 .circlePoint {
   position: absolute;
-  width: 40px;
-  height: 40px;
-  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  font-weight: bold;
+
   offset-path: circle(50% at 50% 50%);
   offset-distance: calc(var(--start) + var(--progress) - var(--initialOffset));
   offset-rotate: 0deg;
   //animation: moveAlongPath 6s infinite linear;
+
+  &__content {
+    background-color: #fefefe;
+    width: 4px;
+    height: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-weight: bold;
+
+    border-radius: 50%;
+    border: 4px solid #777;
+
+    transition: all 0.3s ease-in-out;
+
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  &_active,
+  &:hover {
+    .circlePoint__content {
+      @include circlePointContentActiveStyles;
+    }
+  }
 }
 
 /*
