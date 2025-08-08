@@ -5,7 +5,7 @@ class SpiningPoints {
   private totalElements = 0;
   private stepSize = 0;
   private currentStep = 1;
-  private progess = 0;
+  private progress = 0;
   private activePoint: HTMLElement | null = null;
 
   constructor({
@@ -130,12 +130,36 @@ class SpiningPoints {
   private rotateCounterClockwise(): void {
     if (this.currentStep > 1) {
       this.currentStep--;
+    } else {
+      this.showProgressLimit();
     }
   }
 
-  private setProgress(): void {
-    this.progess = (this.currentStep - 1) * this.stepSize * -1;
-    this.circleContainer.style.setProperty('--progress', this.progess + '%');
+  private setProgress(forcedValue?: number): void {
+    let progress;
+    if (forcedValue) {
+      progress = forcedValue;
+    } else {
+      this.progress = (this.currentStep - 1) * this.stepSize * -1;
+      progress = this.progress;
+    }
+    this.circleContainer.style.setProperty('--progress', progress + '%');
+  }
+
+  private showProgressLimit() {
+    this.circleContainer?.classList.add('circleContainer_fastAnimation');
+    this.setDelayedProgress(3);
+    this.setDelayedProgress(-1, 200);
+    this.setDelayedProgress(0, 400);
+    setTimeout(() => {
+      this.circleContainer?.classList.remove('circleContainer_fastAnimation');
+    }, 600);
+  }
+
+  private setDelayedProgress(progress = 0, delay = 0): void {
+    setTimeout(() => {
+      this.setProgress(progress);
+    }, delay);
   }
 
   // Публичные методы для внешнего управления
@@ -152,7 +176,7 @@ class SpiningPoints {
 
 const spiningPointsConfig = {
   containerSelector: '.circleContainer',
-  startPosition: 2,
+  startPosition: 1,
 };
 // Использование:
 const spiningPoints = new SpiningPoints(spiningPointsConfig);

@@ -20,6 +20,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &_fastAnimation {
+    .circlePoint {
+      transition: all 0.2s ease-in-out;
+    }
+  }
 }
 
 .circlePoint {
@@ -37,7 +43,7 @@
   offset-rotate: 0deg;
   //animation: moveAlongPath 6s infinite linear;
 
-  transition: all 1s ease-in-out;
+  transition: all 0.6s ease-in-out;
 
   &__content {
     background-color: #fefefe;
