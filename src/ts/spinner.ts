@@ -182,8 +182,8 @@ class SpiningPoints {
   }
 
   private showProgressLimit(dir: 'start' | 'end') {
-    this.spinner?.classList.add('spinnerContainer_fastAnimation');
-    const [forward, backward] = dir === 'start' ? [5, -2] : [-3, 1];
+    this.spinner?.classList.add('spinner_fastAnimation');
+    const [forward, backward] = dir === 'start' ? [3, -1] : [-3, 1];
     const offsetList = [this.progress + forward, this.progress + backward];
     this.setDelayedProgress(offsetList[0]);
     this.setDelayedProgress(offsetList[1], 200);
