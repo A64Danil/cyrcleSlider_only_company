@@ -51,6 +51,16 @@
 
   transition: all 0.6s ease-in-out;
 
+  &__description {
+    position: absolute;
+    left: 100%;
+    transform: translate(1rem, 0px);
+    font-weight: 800;
+    font-size: 1rem;
+    transition: all 0.3s ease-in-out;
+    opacity: 0;
+  }
+
   &__content {
     background-color: var(--main-black-color);
     color: var(--main-black-color);
@@ -75,6 +85,12 @@
   &:hover {
     .spinnerPoint__content {
       @include spinnerPointContentActiveStyles;
+    }
+  }
+
+  &_onPlace {
+    .spinnerPoint__description {
+      opacity: 1;
     }
   }
 }

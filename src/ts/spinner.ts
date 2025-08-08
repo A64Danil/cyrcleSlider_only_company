@@ -1,10 +1,13 @@
+import { createElem } from './helpers';
+
 class SpiningPoints {
   private spinnerContainer: HTMLElement | null;
   private spinner: HTMLElement | null;
   private spinnerController: HTMLElement | null;
   private spinnerCounter: HTMLElement | null;
   private spinnerCounterNumber: HTMLElement | null;
-  private elements: NodeListOf<HTMLElement>;
+  private points: unknown[];
+  private elements: Array<HTMLElement> = [];
   private buttons: {
     next: HTMLElement;
     prev: HTMLElement;
@@ -18,9 +21,11 @@ class SpiningPoints {
   constructor({
     containerSelector,
     startPosition,
+    points,
   }: {
     containerSelector: string;
     startPosition: number;
+    points: unknown[];
   }) {
     this.spinnerContainer = document.querySelector(containerSelector);
     if (this.spinnerContainer === null)
@@ -43,15 +48,18 @@ class SpiningPoints {
       '.spinnerCounter__number_current'
     );
 
-    if (!this.spinner) throw new Error('Spinner not found');
+    this.points = points;
+    console.log(this.points);
 
-    this.elements = this.spinner.querySelectorAll('.spinnerPoint');
+    // if (!this.spinner) throw new Error('Spinner not found');
+    //
+    // this.elements = this.spinner.querySelectorAll('.spinnerPoint');
 
-    this.totalElements = this.elements.length;
+    this.totalElements = this.points.length;
     this.stepSize = (1 / this.totalElements) * 100;
-    console.log(this.stepSize);
 
     this.currentStep = startPosition;
+    console.log(this);
 
     this.init();
   }
@@ -64,13 +72,15 @@ class SpiningPoints {
 
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', () => {
-        this.placePointsOnCircle();
+        this.createPoints();
         this.setPosition();
+        this.placePointsOnCircle();
         this.bindEvents();
       });
     } else {
-      this.placePointsOnCircle();
+      this.createPoints();
       this.setPosition();
+      this.placePointsOnCircle();
       this.bindEvents();
     }
   }
@@ -82,7 +92,7 @@ class SpiningPoints {
       '--initialOffset',
       this.getOffsetByChildrenLength(this.totalElements)
     );
-    this.spinner.style.setProperty('--progress', '0%');
+    // this.spinner.style.setProperty('--progress', '0%');
 
     this.elements.forEach((element, index) => {
       const position = (index / this.totalElements) * 100;
@@ -125,9 +135,13 @@ class SpiningPoints {
   private setActivePoint(): void {
     if (this.activePoint) {
       this.activePoint.classList.remove('spinnerPoint_active');
+      this.activePoint.classList.remove('spinnerPoint_onPlace');
     }
     this.activePoint = this.spinner.children[this.currentStep - 1];
     this.activePoint.classList.add('spinnerPoint_active');
+    setTimeout(() => {
+      this.activePoint.classList.add('spinnerPoint_onPlace');
+    }, 650);
   }
 
   private setHtmlCounter() {
@@ -212,6 +226,36 @@ class SpiningPoints {
       this.buttons.next.classList.remove('spinnerBtn_disabled');
     }
   }
+
+  private createPoints(): void {
+    console.log(this.points);
+    this.points.forEach((point) => {
+      const pointElement = createElem({
+        tagName: 'div',
+        className: 'spinnerPoint',
+        dataAttr: {
+          position: point.value.toString(),
+        },
+      });
+
+      const pointContent = createElem({
+        tagName: 'div',
+        className: 'spinnerPoint__content',
+        text: point.value,
+      });
+      pointElement.appendChild(pointContent);
+
+      const pointDescription = createElem({
+        tagName: 'div',
+        className: 'spinnerPoint__description',
+        text: point.name,
+      });
+      pointElement.appendChild(pointDescription);
+
+      this.spinner?.appendChild(pointElement);
+      this.elements.push(pointElement);
+    });
+  }
   // Публичные методы для внешнего управления
   public refresh(): void {
     this.placePointsOnCircle();
@@ -226,7 +270,7 @@ class SpiningPoints {
 
 const spiningPointsConfig = {
   containerSelector: '.spinnerContainer',
-  startPosition: 3,
+  startPosition: 6,
   points: [
     {
       value: 1,
