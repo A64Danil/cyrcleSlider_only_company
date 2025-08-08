@@ -183,7 +183,7 @@ class SpiningPoints {
 
   private showProgressLimit(dir: 'start' | 'end') {
     this.spinner?.classList.add('spinnerContainer_fastAnimation');
-    const [forward, backward] = dir === 'start' ? [3, -1] : [-3, 1];
+    const [forward, backward] = dir === 'start' ? [5, -2] : [-3, 1];
     const offsetList = [this.progress + forward, this.progress + backward];
     this.setDelayedProgress(offsetList[0]);
     this.setDelayedProgress(offsetList[1], 200);
@@ -227,12 +227,88 @@ class SpiningPoints {
 const spiningPointsConfig = {
   containerSelector: '.spinnerContainer',
   startPosition: 3,
-  // points: [
-  //   {
-  //     value: 1,
-  //
-  //   }
-  // ]
+  points: [
+    {
+      value: 1,
+      name: 'Технологии',
+      slides: [
+        {
+          year: 1980,
+          text: 'IBM представляет дисковую подсистему 3380 — крупные много-гигабайтные жёсткие диски.',
+        },
+        {
+          year: 1981,
+          text: 'IBM выпускает персональный компьютер IBM PC на базе MS-DOS.',
+        },
+        {
+          year: 1982,
+          text: 'Sony и Philips запускают коммерческий компакт-диск (CD) и плееры.',
+        },
+        {
+          year: 1983,
+          text: 'ARPANET переходит на TCP/IP, закладывая основу современного интернета.',
+        },
+        {
+          year: 1984,
+          text: 'Apple выпускает Macintosh с графическим интерфейсом и мышью.',
+        },
+        {
+          year: 1985,
+          text: 'Microsoft релизит Windows 1.0 — ранний графический интерфейс для ПК.',
+        },
+        {
+          year: 1986,
+          text: 'IBM представляет переносной ПК PC Convertible — один из первых ноутбуков.',
+        },
+      ],
+    },
+    {
+      value: 2,
+      name: 'Кино',
+      slides: [
+        {
+          year: 1987,
+          text: 'Выходит «Хищник» с Арнольдом Шварценеггером, ставший культовым фантастическим боевиком.',
+        },
+        {
+          year: 1988,
+          text: 'Премьера фильма «Кто подставил кролика Роджера» — революция в сочетании анимации и живых актёров.',
+        },
+        {
+          year: 1989,
+          text: 'Выходит «Бэтмен» Тима Бёртона, задавший мрачный тон супергеройским фильмам.',
+        },
+        {
+          year: 1990,
+          text: 'Премьера комедии «Один дома», ставшей рождественской классикой.',
+        },
+        {
+          year: 1991,
+          text: 'На экраны выходит «Терминатор 2: Судный день» — прорыв в спецэффектах.',
+        },
+      ],
+    },
+    {
+      value: 3,
+      name: 'Литература',
+      slides: [],
+    },
+    {
+      value: 4,
+      name: 'Театр',
+      slides: [],
+    },
+    {
+      value: 5,
+      name: '',
+      slides: [],
+    },
+    {
+      value: 6,
+      name: 'Наука',
+      slides: [],
+    },
+  ],
 };
 // Использование:
 const spiningPoints = new SpiningPoints(spiningPointsConfig);
