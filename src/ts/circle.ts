@@ -83,9 +83,9 @@ class SpiningPoints {
   private moveCircle = (event: Event): void => {
     const target = event.target as HTMLElement;
     if (target.dataset.direction === 'next') {
-      this.rotateCounterClockwise();
-    } else if (target.dataset.direction === 'prev') {
       this.rotateClockwise();
+    } else if (target.dataset.direction === 'prev') {
+      this.rotateCounterClockwise();
     }
     this.setPosition();
   };
@@ -180,7 +180,13 @@ class SpiningPoints {
 
 const spiningPointsConfig = {
   containerSelector: '.circleContainer',
-  startPosition: 1,
+  startPosition: 3,
+  // points: [
+  //   {
+  //     value: 1,
+  //
+  //   }
+  // ]
 };
 // Использование:
 const spiningPoints = new SpiningPoints(spiningPointsConfig);
