@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@100..900&display=swap');
+
 $font-size: 1rem;
 $bg-color: rgb(240 244 247);
 $main-black-color: rgb(53 70 105);
@@ -21,6 +23,9 @@ html {
   font-size: $font-size;
   color: var(--main-black-color);
   background-color: $bg-color;
+  font-family: 'Jost', sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
 
 body {
@@ -29,40 +34,6 @@ body {
 }
 
 .mainTitle {
-  font-size: 52px;
+  font-size: 4rem;
   width: 200px;
-}
-
-.circleControl {
-  //text-align: center;
-}
-
-.circleBtn {
-  width: 50px;
-  height: 50px;
-  border: 1px solid var(--main-black-color);
-  border-radius: 50%;
-
-  background-color: var(--bg-color);
-
-  &:before {
-    content: '';
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border-left: 2px solid var(--main-black-color);
-    border-bottom: 2px solid var(--main-black-color);
-    transform: rotate(45deg);
-  }
-
-  &_prev {
-    margin-right: 20px;
-  }
-
-  &_prev:before {
-    transform: rotate(45deg);
-  }
-  &_next:before {
-    transform: rotate(-135deg);
-  }
 }

@@ -1,7 +1,13 @@
 class SpiningPoints {
   private circleContainer: HTMLElement | null;
   private circleController: HTMLElement | null;
+  private circleCounter: HTMLElement | null;
+  private circleCounterNumber: HTMLElement | null;
   private elements: NodeListOf<HTMLElement>;
+  private buttons: {
+    next: HTMLElement;
+    prev: HTMLElement;
+  };
   private totalElements = 0;
   private stepSize = 0;
   private currentStep = 1;
@@ -17,6 +23,16 @@ class SpiningPoints {
   }) {
     this.circleContainer = document.querySelector(containerSelector);
     this.circleController = document.querySelector('.circleControl');
+    this.circleCounter = document.querySelector('.circleCounter');
+
+    this.buttons = {
+      prev: this.circleController.querySelector('.circleBtn_prev'),
+      next: this.circleController.querySelector('.circleBtn_next'),
+    };
+
+    this.circleCounterNumber = this.circleCounter.querySelector(
+      '.circleCounter__number_current'
+    );
 
     if (!this.circleContainer) throw new Error('Circle container not found');
 
@@ -82,9 +98,9 @@ class SpiningPoints {
 
   private moveCircle = (event: Event): void => {
     const target = event.target as HTMLElement;
-    if (target.dataset.direction === 'next') {
+    if (target === this.buttons.next) {
       this.rotateClockwise();
-    } else if (target.dataset.direction === 'prev') {
+    } else if (target === this.buttons.prev) {
       this.rotateCounterClockwise();
     }
     this.setPosition();
@@ -93,6 +109,8 @@ class SpiningPoints {
   private setPosition(): void {
     this.setActivePoint();
     this.setProgress();
+    this.setHtmlCounter();
+    this.setBtnsState();
   }
 
   private setActivePoint(): void {
@@ -101,6 +119,12 @@ class SpiningPoints {
     }
     this.activePoint = this.circleContainer.children[this.currentStep - 1];
     this.activePoint.classList.add('circlePoint_active');
+  }
+
+  private setHtmlCounter() {
+    this.circleCounterNumber.textContent = this.currentStep
+      .toString()
+      .padStart(2, '0');
   }
 
   private moveCircleByPoint = ({
@@ -166,6 +190,19 @@ class SpiningPoints {
     }, delay);
   }
 
+  private setBtnsState(): void {
+    if (this.currentStep === 1) {
+      this.buttons.prev.classList.add('circleBtn_disabled');
+    } else {
+      this.buttons.prev.classList.remove('circleBtn_disabled');
+    }
+
+    if (this.currentStep === this.totalElements) {
+      this.buttons.next.classList.add('circleBtn_disabled');
+    } else {
+      this.buttons.next.classList.remove('circleBtn_disabled');
+    }
+  }
   // Публичные методы для внешнего управления
   public refresh(): void {
     this.placePointsOnCircle();
