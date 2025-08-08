@@ -1,8 +1,8 @@
 class SpiningPoints {
-  private circleContainer: HTMLElement | null;
-  private circleController: HTMLElement | null;
-  private circleCounter: HTMLElement | null;
-  private circleCounterNumber: HTMLElement | null;
+  private spinner: HTMLElement | null;
+  private spinnerController: HTMLElement | null;
+  private spinnerCounter: HTMLElement | null;
+  private spinnerCounterNumber: HTMLElement | null;
   private elements: NodeListOf<HTMLElement>;
   private buttons: {
     next: HTMLElement;
@@ -21,22 +21,22 @@ class SpiningPoints {
     containerSelector: string;
     startPosition: number;
   }) {
-    this.circleContainer = document.querySelector(containerSelector);
-    this.circleController = document.querySelector('.circleControl');
-    this.circleCounter = document.querySelector('.circleCounter');
+    this.spinner = document.querySelector(containerSelector);
+    this.spinnerController = document.querySelector('.spinnerControl');
+    this.spinnerCounter = document.querySelector('.spinnerCounter');
 
     this.buttons = {
-      prev: this.circleController.querySelector('.circleBtn_prev'),
-      next: this.circleController.querySelector('.circleBtn_next'),
+      prev: this.spinnerController.querySelector('.spinnerBtn_prev'),
+      next: this.spinnerController.querySelector('.spinnerBtn_next'),
     };
 
-    this.circleCounterNumber = this.circleCounter.querySelector(
-      '.circleCounter__number_current'
+    this.spinnerCounterNumber = this.spinnerCounter.querySelector(
+      '.spinnerCounter__number_current'
     );
 
-    if (!this.circleContainer) throw new Error('Circle container not found');
+    if (!this.spinner) throw new Error('Circle container not found');
 
-    this.elements = this.circleContainer.querySelectorAll('.circlePoint');
+    this.elements = this.spinner.querySelectorAll('.spinnerPoint');
 
     this.totalElements = this.elements.length;
     this.stepSize = (1 / this.totalElements) * 100;
@@ -48,7 +48,7 @@ class SpiningPoints {
   }
 
   private init(): void {
-    if (!this.circleContainer) {
+    if (!this.spinner) {
       console.warn('Circle container not found');
       return;
     }
@@ -67,13 +67,13 @@ class SpiningPoints {
   }
 
   private placePointsOnCircle(): void {
-    if (!this.circleContainer) return;
+    if (!this.spinner) return;
 
-    this.circleContainer.style.setProperty(
+    this.spinner.style.setProperty(
       '--initialOffset',
       this.getOffsetByChildrenLength(this.totalElements)
     );
-    this.circleContainer.style.setProperty('--progress', '0%');
+    this.spinner.style.setProperty('--progress', '0%');
 
     this.elements.forEach((element, index) => {
       const position = (index / this.totalElements) * 100;
@@ -115,14 +115,14 @@ class SpiningPoints {
 
   private setActivePoint(): void {
     if (this.activePoint) {
-      this.activePoint.classList.remove('circlePoint_active');
+      this.activePoint.classList.remove('spinnerPoint_active');
     }
-    this.activePoint = this.circleContainer.children[this.currentStep - 1];
-    this.activePoint.classList.add('circlePoint_active');
+    this.activePoint = this.spinner.children[this.currentStep - 1];
+    this.activePoint.classList.add('spinnerPoint_active');
   }
 
   private setHtmlCounter() {
-    this.circleCounterNumber.textContent = this.currentStep
+    this.spinnerCounterNumber.textContent = this.currentStep
       .toString()
       .padStart(2, '0');
   }
@@ -138,8 +138,8 @@ class SpiningPoints {
   };
 
   private bindEvents(): void {
-    if (!this.circleController) return;
-    this.circleController.addEventListener('click', this.moveCircle);
+    if (!this.spinnerController) return;
+    this.spinnerController.addEventListener('click', this.moveCircle);
     this.elements.forEach((element) => {
       element.addEventListener('click', this.moveCircleByPoint);
     });
@@ -169,18 +169,18 @@ class SpiningPoints {
       this.progress = (this.currentStep - 1) * this.stepSize * -1;
       progress = this.progress;
     }
-    this.circleContainer.style.setProperty('--progress', progress + '%');
+    this.spinner.style.setProperty('--progress', progress + '%');
   }
 
   private showProgressLimit(dir: 'start' | 'end') {
-    this.circleContainer?.classList.add('circleContainer_fastAnimation');
+    this.spinner?.classList.add('spinnerContainer_fastAnimation');
     const [forward, backward] = dir === 'start' ? [3, -1] : [-3, 1];
     const offsetList = [this.progress + forward, this.progress + backward];
     this.setDelayedProgress(offsetList[0]);
     this.setDelayedProgress(offsetList[1], 200);
     this.setDelayedProgress(0, 400);
     setTimeout(() => {
-      this.circleContainer?.classList.remove('circleContainer_fastAnimation');
+      this.spinner?.classList.remove('spinnerContainer_fastAnimation');
     }, 600);
   }
 
@@ -192,15 +192,15 @@ class SpiningPoints {
 
   private setBtnsState(): void {
     if (this.currentStep === 1) {
-      this.buttons.prev.classList.add('circleBtn_disabled');
+      this.buttons.prev.classList.add('spinnerBtn_disabled');
     } else {
-      this.buttons.prev.classList.remove('circleBtn_disabled');
+      this.buttons.prev.classList.remove('spinnerBtn_disabled');
     }
 
     if (this.currentStep === this.totalElements) {
-      this.buttons.next.classList.add('circleBtn_disabled');
+      this.buttons.next.classList.add('spinnerBtn_disabled');
     } else {
-      this.buttons.next.classList.remove('circleBtn_disabled');
+      this.buttons.next.classList.remove('spinnerBtn_disabled');
     }
   }
   // Публичные методы для внешнего управления
@@ -209,14 +209,14 @@ class SpiningPoints {
   }
 
   public destroy(): void {
-    if (this.circleController) {
-      this.circleController.removeEventListener('click', this.moveCircle);
+    if (this.spinnerController) {
+      this.spinnerController.removeEventListener('click', this.moveCircle);
     }
   }
 }
 
 const spiningPointsConfig = {
-  containerSelector: '.circleContainer',
+  containerSelector: '.spinner',
   startPosition: 3,
   // points: [
   //   {

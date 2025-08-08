@@ -4,13 +4,15 @@
 //  initial-value: 0%;
 //}
 
-@mixin circlePointContentActiveStyles {
+@mixin spinnerPointContentActiveStyles {
   border-width: 2px;
   width: 100%;
   height: 100%;
 }
 
-.circleContainer {
+.spinnerContainer {
+}
+.spinner {
   position: relative;
   width: 400px;
   height: 400px;
@@ -22,13 +24,13 @@
   justify-content: center;
 
   &_fastAnimation {
-    .circlePoint {
+    .spinnerPoint {
       transition: all 0.2s ease-in-out;
     }
   }
 }
 
-.circlePoint {
+.spinnerPoint {
   position: absolute;
   width: 50px;
   height: 50px;
@@ -66,8 +68,8 @@
 
   &_active,
   &:hover {
-    .circlePoint__content {
-      @include circlePointContentActiveStyles;
+    .spinnerPoint__content {
+      @include spinnerPointContentActiveStyles;
     }
   }
 }
@@ -86,11 +88,11 @@
 //  }
 //}
 
-.circleControl {
+.spinnerControl {
   //text-align: center;
 }
 
-.circleCounter {
+.spinnerCounter {
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 20px;
@@ -98,7 +100,7 @@
   font-weight: 450;
 }
 
-.circleBtn {
+.spinnerBtn {
   width: 50px;
   height: 50px;
   border: 1px solid var(--main-black-color);
