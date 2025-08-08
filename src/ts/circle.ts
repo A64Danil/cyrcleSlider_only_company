@@ -124,6 +124,8 @@ class SpiningPoints {
   private rotateClockwise(): void {
     if (this.currentStep < this.totalElements) {
       this.currentStep++;
+    } else {
+      this.showProgressLimit('end');
     }
   }
 
@@ -131,7 +133,7 @@ class SpiningPoints {
     if (this.currentStep > 1) {
       this.currentStep--;
     } else {
-      this.showProgressLimit();
+      this.showProgressLimit('start');
     }
   }
 
@@ -146,10 +148,12 @@ class SpiningPoints {
     this.circleContainer.style.setProperty('--progress', progress + '%');
   }
 
-  private showProgressLimit() {
+  private showProgressLimit(dir: 'start' | 'end') {
     this.circleContainer?.classList.add('circleContainer_fastAnimation');
-    this.setDelayedProgress(3);
-    this.setDelayedProgress(-1, 200);
+    const [forward, backward] = dir === 'start' ? [3, -1] : [-3, 1];
+    const offsetList = [this.progress + forward, this.progress + backward];
+    this.setDelayedProgress(offsetList[0]);
+    this.setDelayedProgress(offsetList[1], 200);
     this.setDelayedProgress(0, 400);
     setTimeout(() => {
       this.circleContainer?.classList.remove('circleContainer_fastAnimation');
