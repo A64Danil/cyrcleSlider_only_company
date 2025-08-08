@@ -1,4 +1,5 @@
 class SpiningPoints {
+  private spinnerContainer: HTMLElement | null;
   private spinner: HTMLElement | null;
   private spinnerController: HTMLElement | null;
   private spinnerCounter: HTMLElement | null;
@@ -21,10 +22,18 @@ class SpiningPoints {
     containerSelector: string;
     startPosition: number;
   }) {
-    this.spinner = document.querySelector(containerSelector);
-    this.spinnerController = document.querySelector('.spinnerControl');
-    this.spinnerCounter = document.querySelector('.spinnerCounter');
+    this.spinnerContainer = document.querySelector(containerSelector);
+    if (this.spinnerContainer === null)
+      throw new Error('Spinner container not found');
 
+    this.spinner = this.spinnerContainer.querySelector('.spinner');
+    this.spinnerController =
+      this.spinnerContainer.querySelector('.spinnerControl');
+    this.spinnerCounter =
+      this.spinnerContainer.querySelector('.spinnerCounter');
+
+    if (this.spinnerController === null)
+      throw new Error('Spinner controller not found');
     this.buttons = {
       prev: this.spinnerController.querySelector('.spinnerBtn_prev'),
       next: this.spinnerController.querySelector('.spinnerBtn_next'),
@@ -34,7 +43,7 @@ class SpiningPoints {
       '.spinnerCounter__number_current'
     );
 
-    if (!this.spinner) throw new Error('Circle container not found');
+    if (!this.spinner) throw new Error('Spinner not found');
 
     this.elements = this.spinner.querySelectorAll('.spinnerPoint');
 
@@ -216,7 +225,7 @@ class SpiningPoints {
 }
 
 const spiningPointsConfig = {
-  containerSelector: '.spinner',
+  containerSelector: '.spinnerContainer',
   startPosition: 3,
   // points: [
   //   {
