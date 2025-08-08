@@ -1,44 +1,4 @@
+@use 'commonStyles';
 @use 'circleElems';
-
-$font-size: 1rem;
-$font-color: lch(53 105 40);
-
-* {
-  box-sizing: border-box;
-}
-html {
-  font-size: $font-size;
-  color: $font-color;
-}
-
-body {
-  position: relative;
-  height: 100%;
-}
-
-.container {
-  max-width: 600px;
-  margin: 0 auto;
-  //color: green;
-  font-weight: bold;
-  //display: flex;
-}
-
-// Swiper
-.swiper {
-  width: 600px;
-  height: 300px;
-}
-
-.swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: #444;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.circleControl {
-  text-align: center;
-}
+@use 'gridLayout';
+@use 'swiper';
