@@ -1,8 +1,8 @@
-@property --progress {
-  syntax: '<percentage>';
-  inherits: false;
-  initial-value: 0%;
-}
+//@property --progress {
+//  syntax: '<percentage>';
+//  inherits: false;
+//  initial-value: 0%;
+//}
 
 @mixin circlePointContentActiveStyles {
   border-width: 2px;
@@ -36,6 +36,8 @@
   offset-distance: calc(var(--start) + var(--progress) - var(--initialOffset));
   offset-rotate: 0deg;
   //animation: moveAlongPath 6s infinite linear;
+
+  transition: all 1s ease-in-out;
 
   &__content {
     background-color: #fefefe;
@@ -72,8 +74,8 @@
 6 -> 16.6%
 */
 
-@keyframes moveAlongPath {
-  to {
-    --progress: 100%;
-  }
-}
+//@keyframes moveAlongPath {
+//  to {
+//    --progress: 100%;
+//  }
+//}
