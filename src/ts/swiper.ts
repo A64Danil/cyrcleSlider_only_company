@@ -10,7 +10,9 @@ import 'swiper/css/bundle';
 new Swiper('.mySwiper', {
   modules: [Navigation, Pagination],
   // loop: true,
+  slidesPerView: 3.5,
 
+  spaceBetween: 80,
   // If we need pagination
   pagination: {
     el: '.swiper-pagination',

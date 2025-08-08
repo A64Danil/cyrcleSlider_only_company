@@ -1,7 +1,9 @@
 .container {
-  max-width: 1000px;
+  max-width: 1320px;
   margin: 0 auto;
   //color: green;
-  font-weight: bold;
   //display: flex;
+
+  border-left: 1px solid var(--main-gray-color);
+  border-right: 1px solid var(--main-gray-color);
 }
