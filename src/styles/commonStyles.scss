@@ -1,15 +1,68 @@
 $font-size: 1rem;
-$font-color: lch(53 105 40);
+$bg-color: rgb(240 244 247);
+$main-black-color: rgb(53 70 105);
+$main-gray-color: rgb(224 227 233);
+$main-pink-color: rgb(232 76 154);
+$main-blue-color: rgb(44 102 231);
+
+:root {
+  --font-size: #{$font-size};
+  --bg-color: #{$bg-color};
+  --main-black-color: #{$main-black-color};
+  --main-gray-color: #{$main-gray-color};
+  --main-pink-color: #{$main-pink-color};
+  --main-blue-color: #{$main-blue-color};
+}
 
 * {
   box-sizing: border-box;
 }
 html {
   font-size: $font-size;
-  color: $font-color;
+  color: var(--main-black-color);
+  background-color: $bg-color;
 }
 
 body {
   position: relative;
   height: 100%;
+}
+
+.mainTitle {
+  font-size: 52px;
+  width: 200px;
+}
+
+.circleControl {
+  //text-align: center;
+}
+
+.circleBtn {
+  width: 50px;
+  height: 50px;
+  border: 1px solid var(--main-black-color);
+  border-radius: 50%;
+
+  background-color: var(--bg-color);
+
+  &:before {
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-left: 2px solid var(--main-black-color);
+    border-bottom: 2px solid var(--main-black-color);
+    transform: rotate(45deg);
+  }
+
+  &_prev {
+    margin-right: 20px;
+  }
+
+  &_prev:before {
+    transform: rotate(45deg);
+  }
+  &_next:before {
+    transform: rotate(-135deg);
+  }
 }

@@ -46,7 +46,7 @@
   transition: all 0.6s ease-in-out;
 
   &__content {
-    background-color: #fefefe;
+    background-color: var(--bg-color);
     width: 4px;
     height: 4px;
     display: flex;
