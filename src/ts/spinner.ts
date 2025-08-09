@@ -402,8 +402,54 @@ class SpinningPoints {
       secondTitle = lastSlide.year.toString();
     }
 
+    this.titleAnimation(this.titles.first, firstTitle);
     this.titles.first.textContent = firstTitle;
+    this.titleAnimation(this.titles.second, secondTitle);
     this.titles.second.textContent = secondTitle;
+  }
+
+  private titleAnimation(title: HTMLElement, titleText: string): void {
+    if (titleText === '') {
+      title.textContent = '';
+      return;
+    }
+
+    let oldTitle = title.textContent;
+    if (!oldTitle) {
+      title.textContent = titleText;
+      return;
+    }
+
+    const start = parseInt(oldTitle); //oldTitle
+    const end = parseInt(titleText); //ol
+    const minStepTime = 16; // (16ms)
+
+    const difference = start - end;
+    const steps = Math.abs(difference);
+    const actualDuration = Math.max(this.spinningSpeed, steps * minStepTime);
+
+    const startTime = performance.now();
+
+    // const easeOut = (t: number) => 1 - Math.pow(1 - t, 1.2);
+    const easeOut = (t: number) => Math.pow(t, 0.3);
+
+    function update(currentTime: number) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / actualDuration, 1);
+      const easedProgress = easeOut(progress);
+
+      // const current = Math.round(start + difference * progress);
+      const current = Math.round(start + (end - start) * easedProgress);
+      title.textContent = current.toString();
+
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      } else {
+        title.textContent = current.toString();
+      }
+    }
+
+    requestAnimationFrame(update);
   }
   // Публичные методы для внешнего управления
   public refresh(): void {
@@ -421,7 +467,7 @@ const spiningPointsConfig = {
   containerSelector: '.spinnerContainer',
   swiperContainerSelector: '.swiper-mainWrapper',
   startPosition: 2,
-  // speed: 600,
+  speed: 600,
   points: chronicles,
 };
 // Использование:
