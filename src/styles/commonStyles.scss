@@ -3,6 +3,7 @@
 $font-size: 1rem;
 $bg-color: rgb(240 244 247);
 $main-black-color: rgb(53 70 105);
+$secondary-black-color: rgb(80 91 110);
 $main-dark-gray-color: rgb(146 153 164);
 $main-medium-gray-color: rgb(172 175 184);
 $main-light-gray-color: rgba(172, 175, 184, 0.25);
@@ -13,6 +14,7 @@ $main-blue-color: rgb(44 102 231);
   --font-size: #{$font-size};
   --bg-color: #{$bg-color};
   --main-black-color: #{$main-black-color};
+  --secondary-black-color: #{$secondary-black-color};
   --main-dark-gray-color: #{$main-dark-gray-color};
   --main-medium-gray-color: #{$main-medium-gray-color};
   --main-light-gray-color: #{$main-light-gray-color};
