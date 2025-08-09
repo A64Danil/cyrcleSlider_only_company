@@ -17,7 +17,7 @@ $main-blue-color: rgb(44 102 231);
   --main-pink-color: #{$main-pink-color};
   --main-blue-color: #{$main-blue-color};
 
-  --main-padding: 0 80px;
+  --side-padding: 80px;
 }
 
 * {
@@ -51,4 +51,7 @@ p {
   font-size: 3.5rem;
   width: 450px;
   line-height: 110%;
+  position: absolute;
+  top: 0;
+  //left: 0;
 }

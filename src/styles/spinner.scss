@@ -13,13 +13,14 @@
 }
 
 .spinnerContainer {
-  padding: var(--main-padding);
+  position: relative;
+  padding: 30px var(--side-padding) 0;
   margin-bottom: 50px;
 }
 .spinner {
   position: relative;
-  width: 400px;
-  height: 400px;
+  width: 500px;
+  height: 500px;
   margin: 20px auto;
   border: 2px dashed #3498db;
   border-radius: 50%;
@@ -110,7 +111,8 @@
 //}
 
 .spinnerControl {
-  //text-align: center;
+  position: absolute;
+  bottom: 0;
 }
 
 .spinnerCounter {
