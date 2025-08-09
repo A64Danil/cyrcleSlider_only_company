@@ -154,7 +154,6 @@ class SpinningPoints {
       this.rotateCounterClockwise();
     }
     this.updateCircle();
-    this.updateSwiper();
     this.isSpinning = false;
   };
 
@@ -212,6 +211,7 @@ class SpinningPoints {
     if (this.currentStep < this.totalElements) {
       this.currentStep++;
       this.isSpinning = true;
+      this.updateSwiper();
     } else {
       this.showProgressLimit('end');
     }
@@ -221,6 +221,7 @@ class SpinningPoints {
     if (this.currentStep > 1) {
       this.currentStep--;
       this.isSpinning = true;
+      this.updateSwiper();
     } else {
       this.showProgressLimit('start');
     }
