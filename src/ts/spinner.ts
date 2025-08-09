@@ -220,7 +220,7 @@ class SpinningPoints {
     this.setDelayedProgress(offsetList[1], 200);
     this.setDelayedProgress(0, 400);
     setTimeout(() => {
-      this.spinner?.classList.remove('spinnerContainer_fastAnimation');
+      this.spinner?.classList.remove('spinner_fastAnimation');
     }, 600);
   }
 
@@ -300,7 +300,7 @@ class SpinningPoints {
 const spiningPointsConfig = {
   containerSelector: '.spinnerContainer',
   // startPosition: 6,
-  // speed: 1000,
+  // speed: 600,
   points: chronicles,
 };
 // Использование:
