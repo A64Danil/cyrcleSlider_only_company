@@ -1,0 +1,11 @@
+.spinnerDoubleTitle {
+}
+
+.spinnerTitle {
+  &_first {
+    color: var(--main-blue-color);
+  }
+  &_second {
+    color: var(--main-pink-color);
+  }
+}
