@@ -346,31 +346,32 @@ class SpinningPoints {
 
     this.swiperWrapper.innerHTML = '';
 
-    currentSldes.forEach((slide) => {
-      const slideElement = createElem({
-        tagName: 'div',
-        className: 'swiper-slide',
-      });
-      const event = createElem({
-        tagName: 'div',
-        className: 'event',
-      });
-      const eventYear = createElem({
-        tagName: 'h3',
-        className: 'event__year',
-        text: slide.year.toString(),
-      });
-      const eventDesc = createElem({
-        tagName: 'p',
-        className: 'event__desc',
-        text: slide.text,
-      });
-      event.appendChild(eventYear);
-      event.appendChild(eventDesc);
-      slideElement.appendChild(event);
+    currentSldes.length > 0 &&
+      currentSldes.forEach((slide) => {
+        const slideElement = createElem({
+          tagName: 'div',
+          className: 'swiper-slide',
+        });
+        const event = createElem({
+          tagName: 'div',
+          className: 'event',
+        });
+        const eventYear = createElem({
+          tagName: 'h3',
+          className: 'event__year',
+          text: slide.year.toString(),
+        });
+        const eventDesc = createElem({
+          tagName: 'p',
+          className: 'event__desc',
+          text: slide.text,
+        });
+        event.appendChild(eventYear);
+        event.appendChild(eventDesc);
+        slideElement.appendChild(event);
 
-      this.swiperWrapper?.appendChild(slideElement);
-    });
+        this.swiperWrapper?.appendChild(slideElement);
+      });
   }
 
   private setDoubleTitle([firstYear, lastYear]: [number, number]): void {
