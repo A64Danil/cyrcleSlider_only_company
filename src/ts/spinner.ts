@@ -19,6 +19,10 @@ class SpinningPoints {
     next: HTMLElement;
     prev: HTMLElement;
   };
+  private titles: {
+    first: HTMLElement;
+    second: HTMLElement;
+  };
   private totalElements = 0;
   private stepSize = 0;
   private currentStep = 1;
@@ -56,6 +60,11 @@ class SpinningPoints {
     this.buttons = {
       prev: this.spinnerController.querySelector('.spinnerBtn_prev'),
       next: this.spinnerController.querySelector('.spinnerBtn_next'),
+    };
+
+    this.titles = {
+      first: this.spinnerContainer.querySelector('.spinnerTitle_first'),
+      second: this.spinnerContainer.querySelector('.spinnerTitle_second'),
     };
 
     this.spinnerCounterNumber = this.spinnerCounter.querySelector(
@@ -303,9 +312,9 @@ class SpinningPoints {
 
       spaceBetween: 80,
       // If we need pagination
-      pagination: {
-        el: '.swiper-pagination',
-      },
+      // pagination: {
+      //   el: '.swiper-pagination',
+      // },
 
       // Navigation arrows
       navigation: {
@@ -318,9 +327,19 @@ class SpinningPoints {
   private createSwiperSlides(): void {
     const currentSldes = this.points[this.currentStep - 1].slides;
     console.log(currentSldes);
+
+    const firstSlide = currentSldes[0];
+    const lastSlide = currentSldes[currentSldes.length - 1];
+
+    console.log(firstSlide, lastSlide);
+
+    this.setDoubleTitle([firstSlide.year, lastSlide.year]);
   }
 
-  private setDoubleTitle(): void {}
+  private setDoubleTitle([firstYear, lastYear]: [number, number]): void {
+    this.titles.first.textContent = firstYear.toString();
+    this.titles.second.textContent = lastYear.toString();
+  }
   // Публичные методы для внешнего управления
   public refresh(): void {
     this.placePointsOnCircle();
