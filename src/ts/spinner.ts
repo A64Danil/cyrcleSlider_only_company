@@ -30,6 +30,7 @@ class SpinningPoints {
   private activePoint: HTMLElement | null = null;
   private isSpinning = false;
   private spinningSpeed = 650;
+  private swiperWrapper: HTMLElement | null = null;
 
   constructor({
     containerSelector,
@@ -101,16 +102,14 @@ class SpinningPoints {
         this.setPosition();
         this.placePointsOnCircle();
         this.bindEvents();
-        this.initSwiper();
-        this.createSwiperSlides();
+        this.startSwiper();
       });
     } else {
       this.createPoints();
       this.setPosition();
       this.placePointsOnCircle();
       this.bindEvents();
-      this.initSwiper();
-      this.createSwiperSlides();
+      this.startSwiper();
     }
   }
 
@@ -305,6 +304,12 @@ class SpinningPoints {
   }
 
   private initSwiper(): void {
+    this.swiperWrapper = document.querySelector('.swiper-wrapper');
+  }
+
+  private startSwiper(): void {
+    this.initSwiper();
+    this.createSwiperSlides();
     new Swiper('.mySwiper', {
       modules: [Navigation, Pagination],
       // loop: true,
@@ -330,10 +335,35 @@ class SpinningPoints {
 
     const firstSlide = currentSldes[0];
     const lastSlide = currentSldes[currentSldes.length - 1];
-
-    console.log(firstSlide, lastSlide);
-
     this.setDoubleTitle([firstSlide.year, lastSlide.year]);
+
+    this.swiperWrapper.innerHTML = '';
+
+    currentSldes.forEach((slide) => {
+      const slideElement = createElem({
+        tagName: 'div',
+        className: 'swiper-slide',
+      });
+      const event = createElem({
+        tagName: 'div',
+        className: 'event',
+      });
+      const eventYear = createElem({
+        tagName: 'h3',
+        className: 'event__year',
+        text: slide.year.toString(),
+      });
+      const eventDesc = createElem({
+        tagName: 'p',
+        className: 'event__desc',
+        text: slide.text,
+      });
+      event.appendChild(eventYear);
+      event.appendChild(eventDesc);
+      slideElement.appendChild(event);
+
+      this.swiperWrapper?.appendChild(slideElement);
+    });
   }
 
   private setDoubleTitle([firstYear, lastYear]: [number, number]): void {
