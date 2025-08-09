@@ -24,8 +24,8 @@ class SpinningPoints {
 
   constructor({
     containerSelector,
-    startPosition,
-    speed,
+    startPosition = 1,
+    speed = 650,
     points,
   }: {
     containerSelector: string;
@@ -33,6 +33,9 @@ class SpinningPoints {
     speed: number;
     points: unknown[];
   }) {
+    const required = { containerSelector, points };
+    this.validateParams(required);
+
     this.spinnerContainer = document.querySelector(containerSelector);
     if (this.spinnerContainer === null)
       throw new Error('Spinner container not found');
@@ -269,6 +272,18 @@ class SpinningPoints {
       this.elements.push(pointElement);
     });
   }
+
+  private validateParams(required): void {
+    const missing = Object.entries(required)
+      .filter(([key, value]) => value === undefined)
+      .map(([key]) => key);
+
+    if (missing.length > 0) {
+      throw new Error(
+        `Отсутствуют обязательные параметры: ${missing.join(', ')}`
+      );
+    }
+  }
   // Публичные методы для внешнего управления
   public refresh(): void {
     this.placePointsOnCircle();
@@ -283,8 +298,8 @@ class SpinningPoints {
 
 const spiningPointsConfig = {
   containerSelector: '.spinnerContainer',
-  startPosition: 6,
-  speed: 1000,
+  // startPosition: 6,
+  // speed: 1000,
   points: chronicles,
 };
 // Использование:
