@@ -1,6 +1,6 @@
 import { createElem } from './helpers';
 
-class SpiningPoints {
+class SpinningPoints {
   private spinnerContainer: HTMLElement | null;
   private spinner: HTMLElement | null;
   private spinnerController: HTMLElement | null;
@@ -367,6 +367,6 @@ const spiningPointsConfig = {
   ],
 };
 // Использование:
-const spiningPoints = new SpiningPoints(spiningPointsConfig);
+const spiningPoints = new SpinningPoints(spiningPointsConfig);
 // или с кастомным селектором:
-// const spiningPoints = new SpiningPoints('.my-custom-container');
+// const spiningPoints = new SpinningPoints('.my-custom-container');
