@@ -108,6 +108,7 @@ class SpinningPoints {
       document.addEventListener('DOMContentLoaded', () => {
         this.createPoints();
         this.startSwiper();
+        this.updateDoubleTitle();
         this.updateCircle();
         this.placePointsOnCircle();
         this.bindEvents();
@@ -115,6 +116,7 @@ class SpinningPoints {
     } else {
       this.createPoints();
       this.startSwiper();
+      this.updateDoubleTitle();
       this.updateCircle();
       this.placePointsOnCircle();
       this.bindEvents();
@@ -171,8 +173,9 @@ class SpinningPoints {
   }): void => {
     this.currentStep = Number(currentTarget.dataset.position);
     this.isSpinning = true;
-    this.updateCircle();
     this.updateSwiper();
+    this.updateDoubleTitle();
+    this.updateCircle();
     this.isSpinning = false;
   };
 
@@ -223,6 +226,7 @@ class SpinningPoints {
       this.currentStep++;
       this.isSpinning = true;
       this.updateSwiper();
+      this.updateDoubleTitle();
     } else {
       this.showProgressLimit('end');
     }
@@ -233,6 +237,7 @@ class SpinningPoints {
       this.currentStep--;
       this.isSpinning = true;
       this.updateSwiper();
+      this.updateDoubleTitle();
     } else {
       this.showProgressLimit('start');
     }
@@ -354,10 +359,6 @@ class SpinningPoints {
   private updateSwiperSlides(): void {
     const currentSldes = this.points[this.currentStep - 1].slides;
 
-    const firstSlide = currentSldes[0];
-    const lastSlide = currentSldes[currentSldes.length - 1];
-    this.setDoubleTitle([firstSlide, lastSlide]);
-
     this.swiperSliderWrapper.innerHTML = '';
 
     currentSldes.length > 0 &&
@@ -386,6 +387,13 @@ class SpinningPoints {
 
         this.swiperSliderWrapper?.appendChild(slideElement);
       });
+  }
+
+  private updateDoubleTitle(): void {
+    const currentSldes = this.points[this.currentStep - 1].slides;
+    const firstSlide = currentSldes[0];
+    const lastSlide = currentSldes[currentSldes.length - 1];
+    this.setDoubleTitle([firstSlide, lastSlide]);
   }
 
   private setDoubleTitle([firsSlide, lastSlide]: [
