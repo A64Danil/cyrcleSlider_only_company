@@ -139,6 +139,17 @@ class SpinningPoints {
     this.isSpinning = false;
   };
 
+  private moveCircleByPoint = ({
+    currentTarget,
+  }: {
+    currentTarget: HTMLElement;
+  }): void => {
+    this.currentStep = Number(currentTarget.dataset.position);
+    this.isSpinning = true;
+    this.setPosition();
+    this.isSpinning = false;
+  };
+
   private setPosition(): void {
     this.setActivePoint();
     this.setProgress();
@@ -163,16 +174,6 @@ class SpinningPoints {
       .toString()
       .padStart(2, '0');
   }
-
-  private moveCircleByPoint = ({
-    currentTarget,
-  }: {
-    currentTarget: HTMLElement;
-  }): void => {
-    console.log(currentTarget.dataset.position);
-    this.currentStep = Number(currentTarget.dataset.position);
-    this.setPosition();
-  };
 
   private bindEvents(): void {
     if (!this.spinnerController) return;
