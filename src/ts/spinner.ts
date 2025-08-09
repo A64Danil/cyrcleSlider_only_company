@@ -29,8 +29,8 @@ class SpinningPoints {
     points,
   }: {
     containerSelector: string;
-    startPosition: number;
-    speed: number;
+    startPosition?: number;
+    speed?: number;
     points: unknown[];
   }) {
     const required = { containerSelector, points };
