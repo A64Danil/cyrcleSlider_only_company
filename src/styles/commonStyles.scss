@@ -4,7 +4,8 @@ $font-size: 1rem;
 $bg-color: rgb(240 244 247);
 $main-black-color: rgb(53 70 105);
 $main-dark-gray-color: rgb(146 153 164);
-$main-gray-color: rgb(224 227 233);
+$main-medium-gray-color: rgb(172 175 184);
+$main-light-gray-color: rgb(224 227 233);
 $main-pink-color: rgb(232 76 154);
 $main-blue-color: rgb(44 102 231);
 
@@ -13,7 +14,8 @@ $main-blue-color: rgb(44 102 231);
   --bg-color: #{$bg-color};
   --main-black-color: #{$main-black-color};
   --main-dark-gray-color: #{$main-dark-gray-color};
-  --main-gray-color: #{$main-gray-color};
+  --main-medium-gray-color: #{$main-medium-gray-color};
+  --main-light-gray-color: #{$main-light-gray-color};
   --main-pink-color: #{$main-pink-color};
   --main-blue-color: #{$main-blue-color};
 

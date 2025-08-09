@@ -6,6 +6,7 @@
 
 @mixin spinnerPointContentActiveStyles {
   border-width: 2px;
+  border-color: var(--main-medium-gray-color);
   width: 100%;
   height: 100%;
 
@@ -14,19 +15,20 @@
 
 .spinnerContainer {
   position: relative;
-  padding: 30px var(--side-padding) 0;
+  padding: 0 var(--side-padding);
   margin-bottom: 50px;
 }
 .spinner {
   position: relative;
   width: 500px;
   height: 500px;
-  margin: 20px auto;
-  border: 2px dashed #3498db;
+  margin: 0 auto;
+  border: 2px solid var(--main-light-gray-color);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 5;
 
   &_fastAnimation {
     .spinnerPoint {
@@ -74,7 +76,7 @@
     font-weight: bold;
 
     border-radius: 50%;
-    border: 4px solid var(--main-dark-gray-color);
+    border: 4px solid var(--main-black-color);
 
     transition: all 0.3s ease-in-out;
 
@@ -109,6 +111,18 @@
 //    --progress: 100%;
 //  }
 //}
+
+.spinnerDoubleTitle {
+  display: flex;
+  gap: 6rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 12rem;
+  font-weight: 650;
+  z-index: 3;
+}
 
 .spinnerControl {
   position: absolute;
