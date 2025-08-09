@@ -1,6 +1,11 @@
-import { createElem } from './helpers';
+import Swiper from 'swiper';
+import { Navigation, Pagination } from 'swiper/modules';
+import 'swiper/css/bundle';
 
+import { createElem } from './helpers';
 import { chronicles } from '../datasets/chronicles.json';
+
+import { spinnerPoint } from './types/spinnerTypes';
 
 class SpinningPoints {
   private spinnerContainer: HTMLElement | null;
@@ -8,7 +13,7 @@ class SpinningPoints {
   private spinnerController: HTMLElement | null;
   private spinnerCounter: HTMLElement | null;
   private spinnerCounterNumber: HTMLElement | null;
-  private points: unknown[];
+  private points: spinnerPoint[];
   private elements: Array<HTMLElement> = [];
   private buttons: {
     next: HTMLElement;
@@ -87,12 +92,16 @@ class SpinningPoints {
         this.setPosition();
         this.placePointsOnCircle();
         this.bindEvents();
+        this.initSwiper();
+        this.createSwiperSlides();
       });
     } else {
       this.createPoints();
       this.setPosition();
       this.placePointsOnCircle();
       this.bindEvents();
+      this.initSwiper();
+      this.createSwiperSlides();
     }
   }
 
@@ -285,6 +294,33 @@ class SpinningPoints {
       );
     }
   }
+
+  private initSwiper(): void {
+    new Swiper('.mySwiper', {
+      modules: [Navigation, Pagination],
+      // loop: true,
+      slidesPerView: 3.5,
+
+      spaceBetween: 80,
+      // If we need pagination
+      pagination: {
+        el: '.swiper-pagination',
+      },
+
+      // Navigation arrows
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  }
+
+  private createSwiperSlides(): void {
+    const currentSldes = this.points[this.currentStep - 1].slides;
+    console.log(currentSldes);
+  }
+
+  private setDoubleTitle(): void {}
   // Публичные методы для внешнего управления
   public refresh(): void {
     this.placePointsOnCircle();
@@ -299,7 +335,7 @@ class SpinningPoints {
 
 const spiningPointsConfig = {
   containerSelector: '.spinnerContainer',
-  // startPosition: 6,
+  startPosition: 2,
   // speed: 600,
   points: chronicles,
 };
