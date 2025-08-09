@@ -30,6 +30,7 @@ class SpinningPoints {
   private activePoint: HTMLElement | null = null;
   private isSpinning = false;
   private spinningSpeed = 650;
+  private swiper: Swiper | null = null;
   private swiperWrapper: HTMLElement | null = null;
 
   constructor({
@@ -99,17 +100,17 @@ class SpinningPoints {
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', () => {
         this.createPoints();
-        this.setPosition();
+        this.startSwiper();
+        this.updateCircle();
         this.placePointsOnCircle();
         this.bindEvents();
-        this.startSwiper();
       });
     } else {
       this.createPoints();
-      this.setPosition();
+      this.startSwiper();
+      this.updateCircle();
       this.placePointsOnCircle();
       this.bindEvents();
-      this.startSwiper();
     }
   }
 
@@ -152,7 +153,8 @@ class SpinningPoints {
     } else if (target === this.buttons.prev) {
       this.rotateCounterClockwise();
     }
-    this.setPosition();
+    this.updateCircle();
+    this.updateSwiper();
     this.isSpinning = false;
   };
 
@@ -163,15 +165,21 @@ class SpinningPoints {
   }): void => {
     this.currentStep = Number(currentTarget.dataset.position);
     this.isSpinning = true;
-    this.setPosition();
+    this.updateCircle();
+    this.updateSwiper();
     this.isSpinning = false;
   };
 
-  private setPosition(): void {
+  private updateCircle(): void {
     this.setActivePoint();
     this.setProgress();
     this.setHtmlCounter();
     this.setBtnsState();
+  }
+
+  public updateSwiper(): void {
+    this.swiper.slideTo(0, 0);
+    this.updateSwiperSlides();
   }
 
   private setActivePoint(): void {
@@ -309,8 +317,8 @@ class SpinningPoints {
 
   private startSwiper(): void {
     this.initSwiper();
-    this.createSwiperSlides();
-    new Swiper('.mySwiper', {
+    this.updateSwiperSlides();
+    this.swiper = new Swiper('.mySwiper', {
       modules: [Navigation, Pagination],
       // loop: true,
       slidesPerView: 3.5,
@@ -329,9 +337,8 @@ class SpinningPoints {
     });
   }
 
-  private createSwiperSlides(): void {
+  private updateSwiperSlides(): void {
     const currentSldes = this.points[this.currentStep - 1].slides;
-    console.log(currentSldes);
 
     const firstSlide = currentSldes[0];
     const lastSlide = currentSldes[currentSldes.length - 1];
