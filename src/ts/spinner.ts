@@ -32,24 +32,31 @@ class SpinningPoints {
   private spinningSpeed = 650;
   private swiper: Swiper | null = null;
   private swiperWrapper: HTMLElement | null = null;
+  private swiperSliderWrapper: HTMLElement | null = null;
 
   constructor({
     containerSelector,
+    swiperContainerSelector,
     startPosition = 1,
     speed = 650,
     points,
   }: {
     containerSelector: string;
+    swiperContainerSelector: string;
     startPosition?: number;
     speed?: number;
     points: unknown[];
   }) {
-    const required = { containerSelector, points };
+    const required = { containerSelector, swiperContainerSelector, points };
     this.validateParams(required);
 
     this.spinnerContainer = document.querySelector(containerSelector);
     if (this.spinnerContainer === null)
       throw new Error('Spinner container not found');
+
+    this.swiperWrapper = document.querySelector(swiperContainerSelector);
+    if (this.swiperWrapper === null)
+      throw new Error('Swiper wrapper not found');
 
     this.spinner = this.spinnerContainer.querySelector('.spinner');
     this.spinnerController =
@@ -177,8 +184,12 @@ class SpinningPoints {
   }
 
   public updateSwiper(): void {
-    this.swiper.slideTo(0, 0);
-    this.updateSwiperSlides();
+    this.swiperWrapper.style.opacity = '0';
+    setTimeout(() => {
+      this.swiper.slideTo(0, 0);
+      this.updateSwiperSlides();
+      this.swiperWrapper.style.opacity = '1';
+    }, this.spinningSpeed);
   }
 
   private setActivePoint(): void {
@@ -313,7 +324,9 @@ class SpinningPoints {
   }
 
   private initSwiper(): void {
-    this.swiperWrapper = document.querySelector('.swiper-wrapper');
+    this.swiperWrapper.style.transition = 'opacity 0.3s';
+    this.swiperSliderWrapper =
+      this.swiperWrapper.querySelector('.swiper-wrapper');
   }
 
   private startSwiper(): void {
@@ -345,7 +358,7 @@ class SpinningPoints {
     const lastSlide = currentSldes[currentSldes.length - 1];
     this.setDoubleTitle([firstSlide, lastSlide]);
 
-    this.swiperWrapper.innerHTML = '';
+    this.swiperSliderWrapper.innerHTML = '';
 
     currentSldes.length > 0 &&
       currentSldes.forEach((slide) => {
@@ -371,7 +384,7 @@ class SpinningPoints {
         event.appendChild(eventDesc);
         slideElement.appendChild(event);
 
-        this.swiperWrapper?.appendChild(slideElement);
+        this.swiperSliderWrapper?.appendChild(slideElement);
       });
   }
 
@@ -406,6 +419,7 @@ class SpinningPoints {
 
 const spiningPointsConfig = {
   containerSelector: '.spinnerContainer',
+  swiperContainerSelector: '.swiper-mainWrapper',
   startPosition: 2,
   // speed: 600,
   points: chronicles,
