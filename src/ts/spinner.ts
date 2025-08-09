@@ -5,7 +5,7 @@ import 'swiper/css/bundle';
 import { createElem } from './helpers';
 import { chronicles } from '../datasets/chronicles.json';
 
-import { spinnerPoint } from './types/spinnerTypes';
+import { spinnerPoint, swiperSlide } from './types/spinnerTypes';
 
 class SpinningPoints {
   private spinnerContainer: HTMLElement | null;
@@ -342,7 +342,7 @@ class SpinningPoints {
 
     const firstSlide = currentSldes[0];
     const lastSlide = currentSldes[currentSldes.length - 1];
-    this.setDoubleTitle([firstSlide.year, lastSlide.year]);
+    this.setDoubleTitle([firstSlide, lastSlide]);
 
     this.swiperWrapper.innerHTML = '';
 
@@ -374,9 +374,22 @@ class SpinningPoints {
       });
   }
 
-  private setDoubleTitle([firstYear, lastYear]: [number, number]): void {
-    this.titles.first.textContent = firstYear.toString();
-    this.titles.second.textContent = lastYear.toString();
+  private setDoubleTitle([firsSlide, lastSlide]: [
+    swiperSlide,
+    swiperSlide
+  ]): void {
+    let firstTitle = '';
+    let secondTitle = '';
+
+    if (firsSlide) {
+      firstTitle = firsSlide.year.toString();
+    }
+    if (lastSlide) {
+      secondTitle = lastSlide.year.toString();
+    }
+
+    this.titles.first.textContent = firstTitle;
+    this.titles.second.textContent = secondTitle;
   }
   // Публичные методы для внешнего управления
   public refresh(): void {
