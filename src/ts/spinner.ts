@@ -17,14 +17,18 @@ class SpiningPoints {
   private currentStep = 1;
   private progress = 0;
   private activePoint: HTMLElement | null = null;
+  private isSpinning = false;
+  private spinningSpeed = 650;
 
   constructor({
     containerSelector,
     startPosition,
+    speed,
     points,
   }: {
     containerSelector: string;
     startPosition: number;
+    speed: number;
     points: unknown[];
   }) {
     this.spinnerContainer = document.querySelector(containerSelector);
@@ -57,6 +61,8 @@ class SpiningPoints {
 
     this.totalElements = this.points.length;
     this.stepSize = (1 / this.totalElements) * 100;
+
+    this.spinningSpeed = speed;
 
     this.currentStep = startPosition;
     console.log(this);
@@ -92,7 +98,8 @@ class SpiningPoints {
       '--initialOffset',
       this.getOffsetByChildrenLength(this.totalElements)
     );
-    // this.spinner.style.setProperty('--progress', '0%');
+    const speed = this.spinningSpeed / 1000 + 's';
+    this.spinner.style.setProperty('--speed', speed);
 
     this.elements.forEach((element, index) => {
       const position = (index / this.totalElements) * 100;
@@ -117,12 +124,14 @@ class SpiningPoints {
 
   private moveCircle = (event: Event): void => {
     const target = event.target as HTMLElement;
+
     if (target === this.buttons.next) {
       this.rotateClockwise();
     } else if (target === this.buttons.prev) {
       this.rotateCounterClockwise();
     }
     this.setPosition();
+    this.isSpinning = false;
   };
 
   private setPosition(): void {
@@ -133,7 +142,7 @@ class SpiningPoints {
   }
 
   private setActivePoint(): void {
-    if (this.activePoint) {
+    if (this.isSpinning && this.activePoint) {
       this.activePoint.classList.remove('spinnerPoint_active');
       this.activePoint.classList.remove('spinnerPoint_onPlace');
     }
@@ -141,7 +150,7 @@ class SpiningPoints {
     this.activePoint.classList.add('spinnerPoint_active');
     setTimeout(() => {
       this.activePoint.classList.add('spinnerPoint_onPlace');
-    }, 650);
+    }, this.spinningSpeed);
   }
 
   private setHtmlCounter() {
@@ -171,6 +180,7 @@ class SpiningPoints {
   private rotateClockwise(): void {
     if (this.currentStep < this.totalElements) {
       this.currentStep++;
+      this.isSpinning = true;
     } else {
       this.showProgressLimit('end');
     }
@@ -179,6 +189,7 @@ class SpiningPoints {
   private rotateCounterClockwise(): void {
     if (this.currentStep > 1) {
       this.currentStep--;
+      this.isSpinning = true;
     } else {
       this.showProgressLimit('start');
     }
@@ -271,6 +282,7 @@ class SpiningPoints {
 const spiningPointsConfig = {
   containerSelector: '.spinnerContainer',
   startPosition: 6,
+  speed: 1000,
   points: [
     {
       value: 1,
