@@ -208,14 +208,20 @@ class SpinningPoints {
   }
 
   public updateSwiper(): void {
-    // this.swiperWrapper.style.opacity = '0';
-    this.swiperWrapper?.classList.remove('swiper-mainWrapper_show');
+    if (this.swiperWrapper === null) return;
+
+    const tempHeight = this.swiperWrapper.offsetHeight;
+    console.log(tempHeight);
+    this.swiperWrapper.style.minHeight = tempHeight + 'px';
+    this.swiperWrapper.classList.remove('swiper-mainWrapper_show');
+
     setTimeout(() => {
+      if (!this.swiper || this.swiperWrapper === null) return;
       this.swiper.slideTo(0, 0);
       this.updateSwiperSlides();
       // this.swiperWrapper.style.opacity = '1';
 
-      this.swiperWrapper?.classList.add('swiper-mainWrapper_show');
+      this.swiperWrapper.classList.add('swiper-mainWrapper_show');
     }, this.spinningSpeed);
   }
 
@@ -435,22 +441,14 @@ class SpinningPoints {
       this.titles.mobile.first &&
         this.titleAnimation(this.titles.mobile.first, firstTitle);
     }
+
     if (lastSlide) {
       secondTitle = lastSlide.year.toString();
       this.titles.desktop.second &&
-        this.titleAnimation(this.titles.desktop.second, firstTitle);
+        this.titleAnimation(this.titles.desktop.second, secondTitle);
       this.titles.mobile.second &&
-        this.titleAnimation(this.titles.mobile.second, firstTitle);
+        this.titleAnimation(this.titles.mobile.second, secondTitle);
     }
-
-    if (this.titles.mobile.first)
-      this.titles.mobile.first.textContent = firstTitle;
-    if (this.titles.mobile.second)
-      this.titles.mobile.second.textContent = secondTitle;
-    if (this.titles.desktop.first)
-      this.titles.desktop.first.textContent = firstTitle;
-    if (this.titles.desktop.second)
-      this.titles.desktop.second.textContent = secondTitle;
   }
 
   private titleAnimation(title: HTMLElement, titleText: string): void {
