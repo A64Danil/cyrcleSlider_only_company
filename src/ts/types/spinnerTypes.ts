@@ -1,4 +1,4 @@
-export type spinnerPoint = {
+export type SpinnerPoint = {
     value: number;
     name: string;
     slides: {
@@ -6,7 +6,7 @@ export type spinnerPoint = {
         text: string;
     }[]
 }
-export type swiperSlide = {
+export type SwiperSlide = {
     text: string;
     year: number;
 }

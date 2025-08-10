@@ -5,23 +5,29 @@ import 'swiper/css/bundle';
 import { createElem } from './helpers';
 import { chronicles } from '../datasets/chronicles.json';
 
-import { spinnerPoint, swiperSlide } from './types/spinnerTypes';
+import { SpinnerPoint, SwiperSlide } from './types/spinnerTypes';
 
 class SpinningPoints {
-  private spinnerContainer: HTMLElement | null;
+  private mainContainer: HTMLElement | null;
   private spinner: HTMLElement | null;
   private spinnerController: HTMLElement | null;
   private spinnerCounter: HTMLElement | null;
   private spinnerCounterNumber: HTMLElement | null;
-  private points: spinnerPoint[];
+  private points: SpinnerPoint[];
   private elements: Array<HTMLElement> = [];
   private buttons: {
-    next: HTMLElement;
-    prev: HTMLElement;
+    next: HTMLElement | null;
+    prev: HTMLElement | null;
   };
   private titles: {
-    first: HTMLElement;
-    second: HTMLElement;
+    mobile: {
+      first: HTMLElement | null;
+      second: HTMLElement | null;
+    };
+    desktop: {
+      first: HTMLElement | null;
+      second: HTMLElement | null;
+    };
   };
   private totalElements = 0;
   private stepSize = 0;
@@ -45,24 +51,23 @@ class SpinningPoints {
     swiperContainerSelector: string;
     startPosition?: number;
     speed?: number;
-    points: unknown[];
+    points: SpinnerPoint[];
   }) {
     const required = { containerSelector, swiperContainerSelector, points };
     this.validateParams(required);
 
-    this.spinnerContainer = document.querySelector(containerSelector);
-    if (this.spinnerContainer === null)
+    this.mainContainer = document.querySelector(containerSelector);
+    if (this.mainContainer === null)
       throw new Error('Spinner container not found');
 
     this.swiperWrapper = document.querySelector(swiperContainerSelector);
     if (this.swiperWrapper === null)
       throw new Error('Swiper wrapper not found');
 
-    this.spinner = this.spinnerContainer.querySelector('.spinner');
+    this.spinner = this.mainContainer.querySelector('.spinner');
     this.spinnerController =
-      this.spinnerContainer.querySelector('.spinnerControl');
-    this.spinnerCounter =
-      this.spinnerContainer.querySelector('.spinnerCounter');
+      this.mainContainer.querySelector('.spinnerControl');
+    this.spinnerCounter = this.mainContainer.querySelector('.spinnerCounter');
 
     if (this.spinnerController === null)
       throw new Error('Spinner controller not found');
@@ -72,13 +77,29 @@ class SpinningPoints {
     };
 
     this.titles = {
-      first: this.spinnerContainer.querySelector('.spinnerTitle_first'),
-      second: this.spinnerContainer.querySelector('.spinnerTitle_second'),
+      mobile: {
+        first: this.mainContainer.querySelector(
+          '.spinnerDoubleTitle_mob .spinnerTitle_first'
+        ),
+        second: this.mainContainer.querySelector(
+          '.spinnerDoubleTitle_mob .spinnerTitle_second'
+        ),
+      },
+      desktop: {
+        first: this.mainContainer.querySelector(
+          '.spinnerDoubleTitle_desk .spinnerTitle_first'
+        ),
+        second: this.mainContainer.querySelector(
+          '.spinnerDoubleTitle_desk .spinnerTitle_second'
+        ),
+      },
     };
 
-    this.spinnerCounterNumber = this.spinnerCounter.querySelector(
-      '.spinnerCounter__number_current'
-    );
+    if (this.spinnerCounter) {
+      this.spinnerCounterNumber = this.spinnerCounter.querySelector(
+        '.spinnerCounter__number_current'
+      );
+    }
 
     this.points = points;
     console.log(this.points);
@@ -398,23 +419,35 @@ class SpinningPoints {
   }
 
   private setDoubleTitle([firsSlide, lastSlide]: [
-    swiperSlide,
-    swiperSlide
+    SwiperSlide,
+    SwiperSlide
   ]): void {
     let firstTitle = '';
     let secondTitle = '';
 
     if (firsSlide) {
       firstTitle = firsSlide.year.toString();
+      this.titles.desktop.first &&
+        this.titleAnimation(this.titles.desktop.first, firstTitle);
+      this.titles.mobile.first &&
+        this.titleAnimation(this.titles.mobile.first, firstTitle);
     }
     if (lastSlide) {
       secondTitle = lastSlide.year.toString();
+      this.titles.desktop.second &&
+        this.titleAnimation(this.titles.desktop.second, firstTitle);
+      this.titles.mobile.second &&
+        this.titleAnimation(this.titles.mobile.second, firstTitle);
     }
 
-    this.titleAnimation(this.titles.first, firstTitle);
-    this.titles.first.textContent = firstTitle;
-    this.titleAnimation(this.titles.second, secondTitle);
-    this.titles.second.textContent = secondTitle;
+    if (this.titles.mobile.first)
+      this.titles.mobile.first.textContent = firstTitle;
+    if (this.titles.mobile.second)
+      this.titles.mobile.second.textContent = secondTitle;
+    if (this.titles.desktop.first)
+      this.titles.desktop.first.textContent = firstTitle;
+    if (this.titles.desktop.second)
+      this.titles.desktop.second.textContent = secondTitle;
   }
 
   private titleAnimation(title: HTMLElement, titleText: string): void {
