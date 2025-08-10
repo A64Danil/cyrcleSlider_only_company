@@ -8,6 +8,20 @@
   padding: 0 var(--side-padding);
   position: relative;
 
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+
+  transform: translate(0, 10px);
+
+  @media (min-width: 768px) {
+    transform: translate(0, 0);
+  }
+
+  &_show {
+    opacity: 1;
+    transform: translate(0, 0px);
+  }
+
   .swiper-button {
     display: none;
     width: 36px;

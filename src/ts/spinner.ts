@@ -208,11 +208,14 @@ class SpinningPoints {
   }
 
   public updateSwiper(): void {
-    this.swiperWrapper.style.opacity = '0';
+    // this.swiperWrapper.style.opacity = '0';
+    this.swiperWrapper?.classList.remove('swiper-mainWrapper_show');
     setTimeout(() => {
       this.swiper.slideTo(0, 0);
       this.updateSwiperSlides();
-      this.swiperWrapper.style.opacity = '1';
+      // this.swiperWrapper.style.opacity = '1';
+
+      this.swiperWrapper?.classList.add('swiper-mainWrapper_show');
     }, this.spinningSpeed);
   }
 
@@ -350,7 +353,7 @@ class SpinningPoints {
   }
 
   private initSwiper(): void {
-    this.swiperWrapper.style.transition = 'opacity 0.3s';
+    this.swiperWrapper?.classList.add('swiper-mainWrapper_show');
     this.swiperSliderWrapper =
       this.swiperWrapper.querySelector('.swiper-wrapper');
   }
