@@ -16,19 +16,22 @@
 .spinnerContainer {
   position: relative;
   padding: 0 var(--side-padding);
-  margin-bottom: 50px;
 }
 .spinner {
-  position: relative;
-  width: 530px;
-  height: 530px;
-  margin: 0 auto;
-  border: 2px solid var(--light-blue-black-color);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 5;
+  display: none;
+
+  @media screen and (min-width: 768px) {
+    position: relative;
+    width: 530px;
+    height: 530px;
+    margin: 0 auto;
+    border: 2px solid var(--light-blue-black-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+  }
 
   &_fastAnimation {
     .spinnerPoint {
@@ -115,19 +118,27 @@
 
 .spinnerDoubleTitle {
   display: flex;
-  gap: 6rem;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 12.5rem;
   font-weight: 650;
-  z-index: 3;
+  font-size: 3.5rem;
+  justify-content: space-between;
+
+  @media screen and (min-width: 768px) {
+    position: absolute;
+    gap: 6rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12.5rem;
+    z-index: 3;
+  }
 }
 
 .spinnerControl {
-  position: absolute;
-  bottom: 0;
+  //position: absolute;
+  //bottom: 0;
+  margin-left: var(--side-padding);
+  margin-top: -70px;
+  margin-bottom: 3.5rem;
 }
 
 .spinnerCounter {

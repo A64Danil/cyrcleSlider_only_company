@@ -23,7 +23,11 @@ $second-blue-color: #3877ee;
   --main-blue-color: #{$main-blue-color};
   --second-blue-color: #{$second-blue-color};
 
-  --side-padding: 80px;
+  --side-padding: 20px;
+
+  @media screen and (min-width: 768px) {
+    --side-padding: 80px;
+  }
 }
 
 * {

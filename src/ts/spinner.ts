@@ -340,18 +340,19 @@ class SpinningPoints {
     this.swiper = new Swiper('.mySwiper', {
       modules: [Navigation, Pagination],
       // loop: true,
-      slidesPerView: 3.5,
+      slidesPerView: 1.5,
+      spaceBetween: 25,
+      // navigation: false,
 
-      spaceBetween: 80,
-      // If we need pagination
-      // pagination: {
-      //   el: '.swiper-pagination',
-      // },
-
-      // Navigation arrows
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
+      breakpoints: {
+        768: {
+          slidesPerView: 3.5,
+          spaceBetween: 80,
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        },
       },
     });
   }
@@ -472,7 +473,8 @@ class SpinningPoints {
 }
 
 const spiningPointsConfig = {
-  containerSelector: '.spinnerContainer',
+  // containerSelector: '.spinnerContainer',
+  containerSelector: '.historicalCircle',
   swiperContainerSelector: '.swiper-mainWrapper',
   startPosition: 2,
   speed: 600,

@@ -9,6 +9,7 @@
   position: relative;
 
   .swiper-button {
+    display: none;
     width: 36px;
     height: 36px;
     border-radius: 50%;
@@ -23,6 +24,10 @@
       font-size: 14px;
       font-weight: bold;
       color: var(--main-blue-color);
+    }
+
+    @media screen and (min-width: 768px) {
+      display: flex;
     }
   }
 }

@@ -1,10 +1,7 @@
 .mainTitle {
-  font-size: 3.5rem;
-  width: 450px;
-  line-height: 110%;
-  position: absolute;
-  top: 0;
-  //left: 0;
+  font-size: 1.25rem;
+  width: 130px;
+  margin-bottom: 3.5rem;
 
   &:before {
     content: '';
@@ -17,6 +14,17 @@
     background: linear-gradient(to bottom, #3877ee 0%, #ef5da8 100%);
 
     transform: translate(calc(-1 * var(--side-padding)), 0);
+  }
+
+  @media screen and (min-width: 768px) {
+    font-size: 3.5rem;
+    width: 450px;
+    line-height: 110%;
+    position: absolute;
+    top: 0;
+    //left: var(--side-padding);
+    margin-bottom: 0;
+    margin-top: -45px;
   }
 }
 
@@ -41,7 +49,14 @@
     margin-bottom: 1rem;
   }
   &__desc {
-    font-size: 1.25rem;
+    font-size: 0.8rem;
     margin-bottom: 0;
+
+    @media screen and (min-width: 360px) {
+      font-size: 1rem;
+    }
+    @media screen and (min-width: 768px) {
+      font-size: 1.25rem;
+    }
   }
 }

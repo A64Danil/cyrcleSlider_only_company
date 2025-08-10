@@ -2,6 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Тестовое задание - <%= htmlWebpackPlugin.options.title %></title>
     <link
       rel="stylesheet"
@@ -21,33 +23,21 @@
           <div class="spinnerTitle spinnerTitle_first">2010</div>
           <div class="spinnerTitle spinnerTitle_second">2014</div>
         </div>
-
-        <div class="spinnerControl">
-          <div class="spinnerCounter">
-            <span class="spinnerCounter__number spinnerCounter__number_current"
-              >01</span
-            >
-            <span class="spinnerCounter__divider">/</span>
-            <span class="spinnerCounter__number spinnerCounter__number_total"
-              >06</span
-            >
-          </div>
-          <button class="spinnerBtn spinnerBtn_prev"></button>
-          <button class="spinnerBtn spinnerBtn_next"></button>
-        </div>
       </div>
-    </section>
 
-    <section class="container historicalLine">
-      <!-- Swiper -->
-      <!--            <div class="swiper-wrapper">-->
-      <!--              <div class="swiper-slide">-->
-      <!--                <div class="event">-->
-      <!--                  <h3 class="event__year">{year}</h3>-->
-      <!--                  <p class="event__desc">{description}</p>-->
-      <!--                </div>-->
-      <!--              </div>-->
-      <!--            </div>-->
+      <div class="spinnerControl">
+        <div class="spinnerCounter">
+          <span class="spinnerCounter__number spinnerCounter__number_current"
+            >01</span
+          >
+          <span class="spinnerCounter__divider">/</span>
+          <span class="spinnerCounter__number spinnerCounter__number_total"
+            >06</span
+          >
+        </div>
+        <button class="spinnerBtn spinnerBtn_prev"></button>
+        <button class="spinnerBtn spinnerBtn_next"></button>
+      </div>
 
       <div class="swiper-mainWrapper">
         <div class="swiper mySwiper">
@@ -126,6 +116,7 @@
         <div class="swiper-button swiper-button-prev"></div>
       </div>
     </section>
+
     <script></script>
   </body>
 </html>
