@@ -10,6 +10,7 @@ $main-medium-gray-color: rgba(48, 62, 88, 0.5);
 
 $main-pink-color: #ef5da8;
 $main-blue-color: #5d5fef;
+$second-blue-color: #3877ee;
 
 :root {
   --font-size: #{$font-size};
@@ -20,6 +21,7 @@ $main-blue-color: #5d5fef;
   --main-medium-gray-color: #{$main-medium-gray-color};
   --main-pink-color: #{$main-pink-color};
   --main-blue-color: #{$main-blue-color};
+  --second-blue-color: #{$second-blue-color};
 
   --side-padding: 80px;
 }
@@ -49,13 +51,4 @@ h3,
 h4,
 p {
   margin-top: 0;
-}
-
-.mainTitle {
-  font-size: 3.5rem;
-  width: 450px;
-  line-height: 110%;
-  position: absolute;
-  top: 0;
-  //left: 0;
 }
