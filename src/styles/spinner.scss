@@ -20,6 +20,8 @@
   flex-wrap: wrap;
   //flex-direction: row-reverse;
   //justify-content: space-between;
+  order: 1;
+  margin-top: auto;
 
   @media screen and (min-width: 768px) {
     display: block;
@@ -35,6 +37,7 @@
   margin: 0 auto;
   left: 0;
   right: 0;
+  top: 50%;
 
   @media screen and (min-width: 768px) {
     position: relative;
@@ -55,8 +58,8 @@
 }
 
 .spinnerPoint {
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 1rem;
+  height: 1rem;
   border-radius: 50%;
 
   display: flex;
@@ -90,6 +93,8 @@
   }
 
   @media screen and (min-width: 768px) {
+    width: 3.5rem;
+    height: 3.5rem;
     position: absolute;
     offset-path: circle(50% at 50% 50%);
     offset-distance: calc(
@@ -175,6 +180,7 @@
   &_mob {
     display: flex;
     padding: 0 var(--side-padding);
+    margin-bottom: 3.5rem;
 
     @media screen and (min-width: 768px) {
       display: none;
