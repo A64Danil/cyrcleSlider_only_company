@@ -2,33 +2,40 @@
   font-size: 1.25rem;
   width: 130px;
   margin-bottom: 3.5rem;
-
-  &:before {
-    content: '';
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 5px;
-    height: 100%;
-    background: linear-gradient(to bottom, #3877ee 0%, #ef5da8 100%);
-
-    transform: translate(calc(-1 * var(--side-padding)), 0);
-  }
+  padding-left: var(--side-padding);
 
   @media screen and (min-width: 768px) {
     font-size: 3.5rem;
     width: 450px;
     line-height: 110%;
     position: absolute;
-    top: 0;
-    //left: var(--side-padding);
+    top: 170px;
     margin-bottom: 0;
-    margin-top: -45px;
+    left: var(--side-padding);
+    padding-left: 0;
+    //margin-top: -45px;
+
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 5px;
+      height: 100%;
+      background: linear-gradient(to bottom, #3877ee 0%, #ef5da8 100%);
+
+      transform: translate(calc(-1 * var(--side-padding)), 0);
+    }
   }
 }
 
 .spinnerDoubleTitle {
+  font-family: 'PT Sans', sans-serif;
+
+  @media screen and (min-width: 768px) {
+    font-family: 'Jost', sans-serif;
+  }
 }
 
 .spinnerTitle {
