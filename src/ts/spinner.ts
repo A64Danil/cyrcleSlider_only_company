@@ -3,11 +3,10 @@ import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css/bundle';
 
 import { createElem } from './helpers';
-import { chronicles } from '../datasets/chronicles.json';
 
 import { SpinnerPoint, SwiperSlide } from './types/spinnerTypes';
 
-class SpinningPoints {
+export class SpinningPoints {
   private mainContainer: HTMLElement | null;
   private spinner: HTMLElement | null;
   private spinnerController: HTMLElement | null;
@@ -490,16 +489,3 @@ class SpinningPoints {
     requestAnimationFrame(update);
   }
 }
-
-const spiningPointsConfig = {
-  // containerSelector: '.spinnerContainer',
-  containerSelector: '.historicalCircle',
-  swiperContainerSelector: '.swiper-mainWrapper',
-  startPosition: 2,
-  speed: 600,
-  points: chronicles,
-};
-// Использование:
-const spiningPoints = new SpinningPoints(spiningPointsConfig);
-// или с кастомным селектором:
-// const spiningPoints = new SpinningPoints('.my-custom-container');
