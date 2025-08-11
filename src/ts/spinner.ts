@@ -470,7 +470,10 @@ export class SpinningPoints {
 
     const difference = start - end;
     const steps = Math.abs(difference);
-    const actualDuration = Math.max(this.spinningSpeed, steps * minStepTime);
+    const actualDuration = Math.min(
+      Math.max(this.spinningSpeed, steps * minStepTime),
+      this.spinningSpeed * 1.5
+    );
 
     const startTime = performance.now();
 
@@ -482,7 +485,6 @@ export class SpinningPoints {
       const progress = Math.min(elapsed / actualDuration, 1);
       const easedProgress = easeOut(progress);
 
-      // const current = Math.round(start + difference * progress);
       const current = Math.round(start + (end - start) * easedProgress);
       title.textContent = current.toString();
 

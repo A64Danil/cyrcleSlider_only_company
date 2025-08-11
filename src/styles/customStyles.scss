@@ -78,6 +78,12 @@
     transform: translate(0, -20px);
   }
 
+  @media screen {
+    &:before {
+      display: none;
+    }
+  }
+
   .mySwiper {
     border-top: 1px solid var(--medium-blue-black-color);
     padding-top: 20px;
