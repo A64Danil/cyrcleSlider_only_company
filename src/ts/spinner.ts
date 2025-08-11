@@ -100,19 +100,12 @@ class SpinningPoints {
     );
 
     this.points = points;
-    console.log(this.points);
-
-    // if (!this.spinner) throw new Error('Spinner not found');
-    //
-    // this.elements = this.spinner.querySelectorAll('.spinnerPoint');
-
     this.totalElements = this.points.length;
     this.stepSize = (1 / this.totalElements) * 100;
 
     this.spinningSpeed = speed;
 
     this.currentStep = startPosition;
-    console.log(this);
 
     this.init();
   }
@@ -206,15 +199,14 @@ class SpinningPoints {
     if (this.swiperWrapper === null) return;
 
     const tempHeight = this.swiperWrapper.offsetHeight;
-    console.log(tempHeight);
     this.swiperWrapper.style.minHeight = tempHeight + 'px';
     this.swiperWrapper.classList.remove('swiper-mainWrapper_show');
 
     setTimeout(() => {
       if (!this.swiper || this.swiperWrapper === null) return;
+      this.swiperWrapper.dataset.theme = this.points[this.currentStep - 1].name;
       this.swiper.slideTo(0, 0);
       this.updateSwiperSlides();
-      // this.swiperWrapper.style.opacity = '1';
 
       this.swiperWrapper.classList.add('swiper-mainWrapper_show');
     }, this.spinningSpeed);
@@ -317,7 +309,6 @@ class SpinningPoints {
   }
 
   private createPoints(): void {
-    console.log(this.points);
     this.points.forEach((point) => {
       const pointElement = createElem({
         tagName: 'div',
@@ -361,6 +352,7 @@ class SpinningPoints {
   private initSwiper(): void {
     if (!this.swiperWrapper) return;
     this.swiperWrapper.classList.add('swiper-mainWrapper_show');
+    this.swiperWrapper.dataset.theme = this.points[this.currentStep - 1].name;
     this.swiperSliderWrapper =
       this.swiperWrapper.querySelector('.swiper-wrapper');
   }
@@ -496,16 +488,6 @@ class SpinningPoints {
     }
 
     requestAnimationFrame(update);
-  }
-  // Публичные методы для внешнего управления
-  public refresh(): void {
-    this.placePointsOnCircle();
-  }
-
-  public destroy(): void {
-    if (this.spinnerController) {
-      this.spinnerController.removeEventListener('click', this.moveCircle);
-    }
   }
 }
 
