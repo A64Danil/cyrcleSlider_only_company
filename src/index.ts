@@ -5,6 +5,7 @@ import './ts/spinner';
 import { SpinningPoints } from './ts/spinner';
 
 import { chronicles } from './datasets/chronicles.json';
+import { middleAge } from './datasets/middleAge.json';
 
 console.log('Entry point');
 
@@ -16,3 +17,12 @@ const spiningPointsConfig = {
   points: chronicles,
 };
 new SpinningPoints(spiningPointsConfig);
+
+const worldEventsConfig = {
+  containerSelector: '.worldEventsCircle',
+  swiperContainerSelector: '.swiper-mainWrapper',
+  startPosition: 1,
+  speed: 1600,
+  points: middleAge,
+};
+new SpinningPoints(worldEventsConfig);

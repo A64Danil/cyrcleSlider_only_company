@@ -11,21 +11,21 @@
     />
   </head>
   <body>
-    <section class="container historicalCircle">
+    <section class="container circleContainer historicalCircle">
       <!--      <img src="./assets/images/torin.gif" alt="" />-->
       <h1 class="mainTitle">Исторические даты</h1>
 
       <div class="spinnerDoubleTitle spinnerDoubleTitle_mob">
-        <div class="spinnerTitle spinnerTitle_first">2010</div>
-        <div class="spinnerTitle spinnerTitle_second">2014</div>
+        <div class="spinnerTitle spinnerTitle_first"></div>
+        <div class="spinnerTitle spinnerTitle_second"></div>
       </div>
 
       <div class="spinnerContainer">
         <div class="spinner"></div>
 
         <div class="spinnerDoubleTitle spinnerDoubleTitle_desk">
-          <div class="spinnerTitle spinnerTitle_first">2010</div>
-          <div class="spinnerTitle spinnerTitle_second">2014</div>
+          <div class="spinnerTitle spinnerTitle_first"></div>
+          <div class="spinnerTitle spinnerTitle_second"></div>
         </div>
 
         <div class="spinnerControl">
@@ -45,75 +45,49 @@
 
       <div class="swiper-mainWrapper" data-theme="">
         <div class="swiper mySwiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <div class="event">
-                <h3 class="event__year">1980</h3>
-                <p class="event__desc">
-                  IBM представляет дисковую подсистему 3380 — крупные
-                  много-гигабайтные жёсткие диски.
-                </p>
-              </div>
-            </div>
+          <div class="swiper-wrapper"></div>
+          <div class="swiper-pagination"></div>
+        </div>
+        <div class="swiper-button swiper-button-next"></div>
+        <div class="swiper-button swiper-button-prev"></div>
+      </div>
+    </section>
 
-            <div class="swiper-slide">
-              <div class="event">
-                <h3 class="event__year">1981</h3>
-                <p class="event__desc">
-                  IBM выпускает персональный компьютер IBM PC на базе MS-DOS.
-                </p>
-              </div>
-            </div>
+    <section class="container circleContainer worldEventsCircle">
+      <!--      <img src="./assets/images/torin.gif" alt="" />-->
+      <h1 class="mainTitle">Мировые события</h1>
 
-            <div class="swiper-slide">
-              <div class="event">
-                <h3 class="event__year">1982</h3>
-                <p class="event__desc">
-                  Sony и Philips запускают коммерческий компакт-диск (CD) и
-                  плееры.
-                </p>
-              </div>
-            </div>
+      <div class="spinnerDoubleTitle spinnerDoubleTitle_mob">
+        <div class="spinnerTitle spinnerTitle_first"></div>
+        <div class="spinnerTitle spinnerTitle_second"></div>
+      </div>
 
-            <div class="swiper-slide">
-              <div class="event">
-                <h3 class="event__year">1983</h3>
-                <p class="event__desc">
-                  ARPANET переходит на TCP/IP, закладывая основу современного
-                  интернета.
-                </p>
-              </div>
-            </div>
+      <div class="spinnerContainer">
+        <div class="spinner"></div>
 
-            <div class="swiper-slide">
-              <div class="event">
-                <h3 class="event__year">1984</h3>
-                <p class="event__desc">
-                  Apple выпускает Macintosh с графическим интерфейсом и мышью.
-                </p>
-              </div>
-            </div>
+        <div class="spinnerDoubleTitle spinnerDoubleTitle_desk">
+          <div class="spinnerTitle spinnerTitle_first"></div>
+          <div class="spinnerTitle spinnerTitle_second"></div>
+        </div>
 
-            <div class="swiper-slide">
-              <div class="event">
-                <h3 class="event__year">1985</h3>
-                <p class="event__desc">
-                  Microsoft релизит Windows 1.0 — ранний графический интерфейс
-                  для ПК.
-                </p>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <div class="event">
-                <h3 class="event__year">1986</h3>
-                <p class="event__desc">
-                  IBM представляет переносной ПК PC Convertible — один из первых
-                  ноутбуков.
-                </p>
-              </div>
-            </div>
+        <div class="spinnerControl">
+          <div class="spinnerCounter">
+            <span class="spinnerCounter__number spinnerCounter__number_current"
+              >01</span
+            >
+            <span class="spinnerCounter__divider">/</span>
+            <span class="spinnerCounter__number spinnerCounter__number_total"
+              >06</span
+            >
           </div>
+          <button class="spinnerBtn spinnerBtn_prev"></button>
+          <button class="spinnerBtn spinnerBtn_next"></button>
+        </div>
+      </div>
+
+      <div class="swiper-mainWrapper" data-theme="">
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper"></div>
           <div class="swiper-pagination"></div>
         </div>
         <div class="swiper-button swiper-button-next"></div>

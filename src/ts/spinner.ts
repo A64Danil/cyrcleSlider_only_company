@@ -59,7 +59,9 @@ export class SpinningPoints {
     if (this.mainContainer === null)
       throw new Error('Spinner container not found');
 
-    this.swiperWrapper = document.querySelector(swiperContainerSelector);
+    this.swiperWrapper = this.mainContainer.querySelector(
+      swiperContainerSelector
+    );
     if (this.swiperWrapper === null)
       throw new Error('Swiper wrapper not found');
 
@@ -359,7 +361,12 @@ export class SpinningPoints {
   private startSwiper(): void {
     this.initSwiper();
     this.updateSwiperSlides();
-    this.swiper = new Swiper('.mySwiper', {
+    const swiperHTMLElem = this.swiperWrapper.querySelector(
+      '.swiper'
+    ) as HTMLElement;
+    if (!swiperHTMLElem) throw new Error('Swiper not found');
+
+    this.swiper = new Swiper(swiperHTMLElem, {
       modules: [Navigation, Pagination],
       // loop: true,
       slidesPerView: 1.5,
