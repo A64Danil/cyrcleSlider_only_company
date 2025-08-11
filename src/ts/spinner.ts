@@ -361,7 +361,7 @@ export class SpinningPoints {
   private startSwiper(): void {
     this.initSwiper();
     this.updateSwiperSlides();
-    const swiperHTMLElem = this.swiperWrapper.querySelector(
+    const swiperHTMLElem = this.swiperWrapper?.querySelector(
       '.swiper'
     ) as HTMLElement;
     if (!swiperHTMLElem) throw new Error('Swiper not found');
