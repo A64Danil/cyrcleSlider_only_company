@@ -12,7 +12,7 @@ class SpinningPoints {
   private spinner: HTMLElement | null;
   private spinnerController: HTMLElement | null;
   private spinnerCounter: HTMLElement | null;
-  private spinnerCounterNumber: HTMLElement | null;
+  private spinnerCounterNumber: HTMLElement | null | undefined;
   private points: SpinnerPoint[];
   private elements: Array<HTMLElement> = [];
   private buttons: {
@@ -95,11 +95,9 @@ class SpinningPoints {
       },
     };
 
-    if (this.spinnerCounter) {
-      this.spinnerCounterNumber = this.spinnerCounter.querySelector(
-        '.spinnerCounter__number_current'
-      );
-    }
+    this.spinnerCounterNumber = this.spinnerCounter?.querySelector(
+      '.spinnerCounter__number_current'
+    );
 
     this.points = points;
     console.log(this.points);
@@ -187,11 +185,8 @@ class SpinningPoints {
     this.isSpinning = false;
   };
 
-  private moveCircleByPoint = ({
-    currentTarget,
-  }: {
-    currentTarget: HTMLElement;
-  }): void => {
+  private moveCircleByPoint = (e: MouseEvent): void => {
+    const currentTarget = e.currentTarget as HTMLElement;
     this.currentStep = Number(currentTarget.dataset.position);
     this.isSpinning = true;
     this.updateSwiper();
@@ -226,21 +221,26 @@ class SpinningPoints {
   }
 
   private setActivePoint(): void {
+    if (!this.spinner) return;
     if (this.isSpinning && this.activePoint) {
       this.activePoint.classList.remove('spinnerPoint_active');
       this.activePoint.classList.remove('spinnerPoint_onPlace');
     }
-    this.activePoint = this.spinner.children[this.currentStep - 1];
+    this.activePoint = this.spinner.children[
+      this.currentStep - 1
+    ] as HTMLElement;
     this.activePoint.classList.add('spinnerPoint_active');
     setTimeout(() => {
-      this.activePoint.classList.add('spinnerPoint_onPlace');
+      this.activePoint?.classList.add('spinnerPoint_onPlace');
     }, this.spinningSpeed);
   }
 
   private setHtmlCounter() {
-    this.spinnerCounterNumber.textContent = this.currentStep
-      .toString()
-      .padStart(2, '0');
+    if (this.spinnerCounterNumber) {
+      this.spinnerCounterNumber.textContent = this.currentStep
+        .toString()
+        .padStart(2, '0');
+    }
   }
 
   private bindEvents(): void {
@@ -281,7 +281,7 @@ class SpinningPoints {
       this.progress = (this.currentStep - 1) * this.stepSize * -1;
       progress = this.progress;
     }
-    this.spinner.style.setProperty('--progress', progress + '%');
+    this.spinner?.style.setProperty('--progress', progress + '%');
   }
 
   private showProgressLimit(dir: 'start' | 'end') {
@@ -304,15 +304,15 @@ class SpinningPoints {
 
   private setBtnsState(): void {
     if (this.currentStep === 1) {
-      this.buttons.prev.classList.add('spinnerBtn_disabled');
+      this.buttons.prev?.classList.add('spinnerBtn_disabled');
     } else {
-      this.buttons.prev.classList.remove('spinnerBtn_disabled');
+      this.buttons.prev?.classList.remove('spinnerBtn_disabled');
     }
 
     if (this.currentStep === this.totalElements) {
-      this.buttons.next.classList.add('spinnerBtn_disabled');
+      this.buttons.next?.classList.add('spinnerBtn_disabled');
     } else {
-      this.buttons.next.classList.remove('spinnerBtn_disabled');
+      this.buttons.next?.classList.remove('spinnerBtn_disabled');
     }
   }
 
@@ -330,7 +330,7 @@ class SpinningPoints {
       const pointContent = createElem({
         tagName: 'div',
         className: 'spinnerPoint__content',
-        text: point.value,
+        text: point.value.toString(),
       });
       pointElement.appendChild(pointContent);
 
@@ -346,7 +346,7 @@ class SpinningPoints {
     });
   }
 
-  private validateParams(required): void {
+  private validateParams(required: Record<string, unknown>): void {
     const missing = Object.entries(required)
       .filter(([key, value]) => value === undefined)
       .map(([key]) => key);
@@ -359,7 +359,8 @@ class SpinningPoints {
   }
 
   private initSwiper(): void {
-    this.swiperWrapper?.classList.add('swiper-mainWrapper_show');
+    if (!this.swiperWrapper) return;
+    this.swiperWrapper.classList.add('swiper-mainWrapper_show');
     this.swiperSliderWrapper =
       this.swiperWrapper.querySelector('.swiper-wrapper');
   }
@@ -388,6 +389,8 @@ class SpinningPoints {
   }
 
   private updateSwiperSlides(): void {
+    if (!this.swiperSliderWrapper) throw new Error('Swiper wrapper not found');
+
     const currentSldes = this.points[this.currentStep - 1].slides;
 
     this.swiperSliderWrapper.innerHTML = '';
