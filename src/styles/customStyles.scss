@@ -67,3 +67,15 @@
     }
   }
 }
+
+.swiper-mainWrapper {
+  .mySwiper {
+    border-top: 1px solid var(--medium-blue-black-color);
+    padding-top: 20px;
+
+    @media screen and (min-width: 768px) {
+      border-top: none;
+      padding-top: 0;
+    }
+  }
+}
