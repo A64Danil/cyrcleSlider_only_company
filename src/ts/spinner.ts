@@ -364,6 +364,14 @@ export class SpinningPoints {
     const swiperHTMLElem = this.swiperWrapper?.querySelector(
       '.swiper'
     ) as HTMLElement;
+    const swiperNextBtn = this.swiperWrapper?.querySelector(
+      '.swiper-button-next'
+    ) as HTMLElement;
+    const swiperPrevBtn = this.swiperWrapper?.querySelector(
+      '.swiper-button-prev'
+    ) as HTMLElement;
+
+    console.log(swiperNextBtn, swiperPrevBtn);
     if (!swiperHTMLElem) throw new Error('Swiper not found');
 
     this.swiper = new Swiper(swiperHTMLElem, {
@@ -378,8 +386,8 @@ export class SpinningPoints {
           slidesPerView: 3.5,
           spaceBetween: 80,
           navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
+            nextEl: swiperNextBtn,
+            prevEl: swiperPrevBtn,
           },
         },
       },
