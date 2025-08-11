@@ -69,6 +69,15 @@
 }
 
 .swiper-mainWrapper {
+  &:before {
+    content: attr(data-theme);
+    display: block;
+    position: absolute;
+    left: var(--side-padding);
+    bottom: 100%;
+    transform: translate(0, -20px);
+  }
+
   .mySwiper {
     border-top: 1px solid var(--medium-blue-black-color);
     padding-top: 20px;
