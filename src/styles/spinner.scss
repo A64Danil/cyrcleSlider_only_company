@@ -123,6 +123,7 @@
 
     &__description {
       position: absolute;
+      display: block;
       left: 100%;
       transform: translate(1rem, 0px);
       font-weight: 800;
