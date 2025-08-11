@@ -15,7 +15,7 @@
 3. В качестве аргумента передать объект с параметрами
 
 ## Описание параметров конфига
-
+```
 const worldEventsConfig = {
 containerSelector: '.worldEventsCircle',
 swiperContainerSelector: '.swiper-mainWrapper',
@@ -23,7 +23,7 @@ startPosition: 1,
 speed: 1600,
 points: middleAge,
 };
-
+```
 | Параметр | Тип            | Описание | Значение по умолчанию | Обязательный |
 | --- |----------------| --- |-----------------------| --- |
 | containerSelector | string         | Селектор контейнера | -                     | Да |
